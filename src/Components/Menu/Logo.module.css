@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Sirin+Stencil&display=swap");
+
+.imgDiv {
+  width: 90px;
+  height: 90px;
+  margin-top: 10px;
+}
+.imgDiv + p {
+  text-align: center;
+  font-family: "Sirin Stencil";
+  font-size: 1.5rem;
+}

@@ -1,0 +1,21 @@
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frame button.login {
+  background-color: #56c0c0;
+}
+.frame button {
+  background-color: #fa9b66;
+  border-style: none;
+  font-weight: 600;
+  padding: 5px 20px;
+}
+.imgDiv {
+  width: 50px;
+}
+.imgDiv + p {
+  text-align: center;
+  font-size: 1.2rem;
+}
