@@ -1,0 +1,28 @@
+.frame {
+  display: flex;
+  margin-bottom: 5px;
+}
+.frame > div {
+  box-shadow: rgb(200, 200, 200) 0px 2px 2px 1px;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+.frame p {
+  padding: 1px 10px;
+}
+.div_1 p:nth-child(1),
+.div_2 p:nth-child(1),
+.div_3 p:nth-child(1),
+.div_4 p:nth-child(1) {
+  background-color: #7ed1ff;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+}
+.div_1 p:nth-child(2),
+.div_2 p:nth-child(2),
+.div_3 p:nth-child(2),
+.div_4 p:nth-child(2) {
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+}

@@ -1,0 +1,97 @@
+.frame {
+  display: flex;
+  position: relative;
+  padding-bottom: 50px;
+  /* padding: 5px; */
+  /* background-color: gold; */
+}
+.space {
+  margin-left: 30px;
+  width: 30px;
+  border-left: black solid 2px;
+  border-bottom: black solid 2px;
+  /* background-color: teal; */
+}
+.goodsData {
+  display: flex;
+}
+.goodsData span {
+  height: fit-content;
+  align-self: center;
+  position: relative;
+  top: 3px;
+  margin-left: 5px;
+  padding: 0px 10px;
+  border-bottom: black solid 2px;
+}
+.goodsData span:nth-child(5) {
+  border-bottom: transparent solid 2px;
+  padding: 0;
+}
+.goodsData input {
+  border: none;
+  border-bottom: black solid 2px;
+  margin: 6px 5px 0px 7px;
+  padding: 0px 10px 0px 10px;
+  width: 150px;
+
+  /* max-width: 100px;   */
+  /* background-color: aqua; */
+}
+.goodsData input:focus {
+  outline: 2px ridge rgba(126, 209, 255, 0.6);
+  border: none;
+  /* outline-offset: 4px; */
+}
+.goodsData input:nth-child(4) {
+  width: 60px;
+}
+.minusBtn,
+.plusBtn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7ed1ff;
+  position: absolute;
+  border: black solid 2px;
+}
+
+.minusBtn:hover {
+  background-color: #9cdcff;
+  border-color: #7ed1ff;
+  color: white;
+  cursor: pointer;
+}
+.minusBtn {
+  left: -25px;
+  top: 15px;
+}
+.minusBtn::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 2px;
+  left: 35px;
+  border-top: 3px dashed black;
+}
+.plusBtn:hover {
+  background-color: #9cdcff;
+  border-color: #7ed1ff;
+  color: white;
+  cursor: pointer;
+}
+.plusBtn {
+  left: 16px;
+  top: 55px;
+}
+.plusBtn::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  top: -20px;
+  border-left: 3px dashed black;
+}

@@ -1,0 +1,10 @@
+.frame {
+  display: flex;
+  align-self: center;
+}
+.frame > div {
+  padding: 0 8px;
+}
+.frame > div > span {
+  padding: 0 5px;
+}

@@ -1,9 +1,12 @@
 .frame {
-  width: 660px;
+  border: #4083e7 solid 2px;
+  border-radius: 18px;
+  width: 100%;
+  height: fit-content;
+  margin: 8px 8px 0 0;
+  padding: 10px;
+  padding-left: 30px;
   box-shadow: rgb(200, 200, 200) 0px 2px 3px 2px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 5px;
   position: relative;
 }
 .div1 {
@@ -42,20 +45,4 @@
 .checkBtn_icon {
   margin-right: 5px;
 }
-.deleteBtn {
-  color: #ff7b7b;
-  border: #ff7b7b solid 2px;
-  border-radius: 50%;
-  background-color: #fff;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.deleteBtn:hover {
-  background-color: #ff7b7b;
-  transition: all 0.2s;
-  color: #fff;
-}
+

@@ -1,12 +1,22 @@
+import styles from "./CheckBoxes.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
 function CheckBoxes() {
   return (
-    <div>
-      <input type="checkbox" id="writeWeight"></input>
-      <label for="writeWeight">抄重量</label>
-      <input type="checkbox" id="mixPallet"></input>
-      <label for="mixPallet">混合板</label>
-      <input type="checkbox" id="sortExpiry"></input>
-      <label for="sortExpiry">分效期</label>
+    <div className={styles.frame}>
+      <div>
+        <FontAwesomeIcon icon={faCheck} />
+        <span>抄重量</span>
+      </div>
+      <div>
+        <FontAwesomeIcon icon={faCheck} />
+        <span>混合板</span>
+      </div>
+      <div>
+        <FontAwesomeIcon icon={faCheck} />
+        <span>分效期</span>
+      </div>
     </div>
   );
 }

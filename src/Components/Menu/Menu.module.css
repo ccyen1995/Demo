@@ -1,7 +1,6 @@
 .frame {
   background-color: #96e2e2;
   width: 123px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +14,7 @@
   position: relative;
   background-color: #6df0f0;
   transition: 0.2s;
-  border: black solid 2px;
+  border: #3e9a9a solid 2px;
 }
 .menuLink a {
   background-color: #56c0c0;
@@ -25,4 +24,5 @@
   line-height: 80px;
   font-size: 1.2rem;
   border: transparent solid 2px;
+  cursor: pointer;
 }

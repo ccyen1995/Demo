@@ -1,0 +1,55 @@
+.frame {
+  display: flex;
+}
+.frame > div {
+  box-shadow: rgb(200, 200, 200) 0px 2px 2px 1px;
+  border-radius: 5px;
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.frame > div label {
+  background-color: #7ed1ff;
+  width: 100px;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+}
+.frame > div p:nth-child(1) {
+  background-color: #7ed1ff;
+  width: 100px;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+}
+.frame > div p:nth-child(2) {
+  width: 100px;
+  border: none;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  color: #8b8b8b;
+}
+
+.frame > div input {
+  width: 100px;
+  border: none;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  color: #8b8b8b;
+  position: relative;
+}
+
+.frame > div input:focus {
+  color: black;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  position: absolute;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  width: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
