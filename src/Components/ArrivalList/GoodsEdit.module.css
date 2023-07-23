@@ -1,16 +1,12 @@
 .frame {
   display: flex;
   position: relative;
-  padding-bottom: 50px;
-  /* padding: 5px; */
-  /* background-color: gold; */
 }
 .space {
   margin-left: 30px;
   width: 30px;
   border-left: black solid 2px;
   border-bottom: black solid 2px;
-  /* background-color: teal; */
 }
 .goodsData {
   display: flex;

@@ -4,8 +4,7 @@
   width: 100%;
   height: fit-content;
   margin: 8px 8px 0 0;
-  padding: 10px;
-  padding-left: 30px;
+  padding: 10px 10px 60px 30px;
   box-shadow: rgb(200, 200, 200) 0px 2px 3px 2px;
   position: relative;
 }
@@ -20,7 +19,7 @@
   flex-direction: column;
 }
 .checkBtn {
-  background-color: #fff27e;
+  background-color: #ffcea0;
   border: none;
   border-radius: 5px;
   margin-bottom: 5px;
@@ -28,7 +27,7 @@
   cursor: pointer;
 }
 .modifyBtn {
-  background-color: #7effd1;
+  background-color: #7ed1ff;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -45,4 +44,3 @@
 .checkBtn_icon {
   margin-right: 5px;
 }
-
