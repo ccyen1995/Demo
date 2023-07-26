@@ -37,7 +37,12 @@ function AddArrivalItem() {
           isbtn = false;
         }
         return (
-          <GoodsEdit key={i} fns={{ 1: j, 2: l }} isbtn={isbtn}></GoodsEdit>
+          <GoodsEdit
+            key={i}
+            keys={i < 9 ? "0" + (i + 1) : i + 1}
+            fns={{ 1: j, 2: l }}
+            isbtn={isbtn}
+          ></GoodsEdit>
         );
       })}
       <div className={styles.buttonDiv}>

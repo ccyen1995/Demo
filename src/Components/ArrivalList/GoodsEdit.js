@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 function Goods(props) {
+  // const [inputdata] = useState();
+  console.log(props);
   return (
     <div className={styles.frame}>
       {!props.isbtn || (
@@ -18,7 +20,7 @@ function Goods(props) {
       )}
       <div className={styles.space}></div>
       <div className={styles.goodsData}>
-        <span>01</span>
+        <span>{props.keys}</span>
         <input type="text"></input>
         <input type="text"></input>
         <input type="number"></input>
