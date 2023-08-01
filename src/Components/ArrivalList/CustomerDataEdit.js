@@ -1,56 +1,73 @@
 import styles from "./CustomerDataEdit.module.css";
 import { useState } from "react";
-function CustomerData() {
-  const [customerId, setCustomerId] = useState("客戶代號");
-  const [FistTimeFocus, setFirstTimeFocus] = useState(true);
-  function clearCustomerId(e) {
-    if (FistTimeFocus == true) {
-      setCustomerId("");
-      setFirstTimeFocus(false);
+
+function CustomerData(props) {
+  const date = props.inputDate.toISOString().substring(0, 10);
+  const [firsttype, setfirsttype] = useState(true);
+  const [isanyword, setisanyword] = useState(false);
+  const [long, setlong] = useState(true);
+  function setid(e) {
+    props.setcustomerId(e.target.value);
+    setisanyword(true);
+    if (e.target.value == "") {
+      setisanyword(false);
+      setlong(false);
     }
   }
-  function SetInputValue(e) {
-    if (e.target.defaultValue.length == 4) {
-      return;
-    }
-    if (!(0 <= e.nativeEvent.data && e.nativeEvent.data <= 9)) {
-      setCustomerId((p) => p);
-    } else {
-      setCustomerId(e.target.value.slice(1));
+  function clearid() {
+    if (firsttype) {
+      setlong(false);
+      setfirsttype(false);
+      props.setcustomerId("");
     }
   }
-  function blurFuc(e) {
-    if (e.target.value == "E") {
-      setCustomerId("客戶代號");
-      setFirstTimeFocus(true);
+  function anyword(e) {
+    if (e.target.value == "") {
+      setisanyword(false);
     }
+    if (!isanyword) {
+      setfirsttype(true);
+      setlong(true);
+    }
+    return;
   }
-  const inputDate = new Date().toISOString().substring(0, 10);
+
+  //
+  function changeDate(e) {
+    props.setinputDate(new Date(e.target.value));
+  }
   return (
     <div className={styles.frame}>
-      <div className={styles.div_2}>
+      <div>
         <label htmlFor="CustomerData_CustomerId">客戶代號</label>
-        <input
-          type="text"
-          id="CustomerData_CustomerId"
-          onFocus={clearCustomerId}
-          value={"E" + customerId}
-          onChange={SetInputValue}
-          onBlur={blurFuc}
-        ></input>
+        <div>
+          <span>E -</span>
+          <input
+            type="number"
+            id="CustomerData_CustomerId"
+            value={props.customerId}
+            onChange={setid}
+            onClick={clearid}
+            onBlur={anyword}
+            placeholder={!long ? "" : "客戶代號"}
+            className={isanyword || !long ? styles.opp : styles.op}
+            maxLength={3}
+          ></input>
+        </div>
       </div>
-      <div className={styles.div_3}>
+      <div>
         <p>客戶代號</p>
         <p>自動帶入</p>
       </div>
-      <div className={styles.div_4}>
+      <div>
         <label htmlFor="CustomerData_Date">入庫日期</label>
         <input
-          defaultValue={inputDate}
+          value={date}
           min={"2020-01-01"}
           max={"2099-12-31"}
           type="date"
           id="CustomerData_Date"
+          onChange={changeDate}
         ></input>
       </div>
     </div>

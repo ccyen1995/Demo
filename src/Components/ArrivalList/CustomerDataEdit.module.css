@@ -29,7 +29,7 @@
   color: #8b8b8b;
 }
 
-.frame > div input {
+.frame input {
   width: 100px;
   border: none;
   border-radius: 0 0 5px 5px;
@@ -37,7 +37,17 @@
   color: #8b8b8b;
   position: relative;
 }
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input.op {
+  width: 80px;
+  /* background-color: aqua; */
+}
+input.opp {
+  width: 50px;
+}
 .frame > div input:focus {
   color: black;
 }

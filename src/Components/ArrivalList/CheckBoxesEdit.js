@@ -1,18 +1,16 @@
 import styles from "./CheckBoxesEdit.module.css";
 import { useState } from "react";
-function CheckBoxesEdit() {
-  const [checkState, setcheckState] = useState({
-    transcribeweight: false,
-    mixpallet: false,
-    classifyexpiry: false,
-  });
-
+function CheckBoxesEdit(props) {
+  // const [checkState, setcheckState] = useState({
+  //   transcribeweight: false,
+  //   mixpallet: false,
+  //   classifyexpiry: false,
+  // });
   function setChecked(e) {
     const inputId = e.target.id;
     const inputChecked = e.target.checked;
-    setcheckState((p) => {
+    props.setcheckState((p) => {
       p[inputId] = inputChecked;
-      console.log(p);
       return p;
     });
   }
