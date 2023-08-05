@@ -4,22 +4,14 @@ import ArrivalItem from "./ArrivalItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function ArrivalList() {
+function ArrivalList(props) {
+  console.log(props);
   return (
     <div className={styles.frame}>
       <div className={styles.innerFrame}>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
-        <ArrivalItem></ArrivalItem>
+        {props.data.map((data, i, arr) => {
+          return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>;
+        })}
       </div>
       <div className={styles.filterSec}>
         <div className={styles.filterDiv}>

@@ -6,6 +6,7 @@ function CustomerData(props) {
   const [firsttype, setfirsttype] = useState(true);
   const [isanyword, setisanyword] = useState(false);
   const [long, setlong] = useState(true);
+  //*改變customerid欄位
   function setid(e) {
     props.setcustomerId(e.target.value);
     setisanyword(true);
@@ -14,6 +15,7 @@ function CustomerData(props) {
       setlong(false);
     }
   }
+  //*清除customerid欄位，回歸到空值
   function clearid() {
     if (firsttype) {
       setlong(false);
@@ -21,6 +23,7 @@ function CustomerData(props) {
       props.setcustomerId("");
     }
   }
+  //*裡面有字嗎?
   function anyword(e) {
     if (e.target.value == "") {
       setisanyword(false);
@@ -31,11 +34,12 @@ function CustomerData(props) {
     }
     return;
   }
+  //*改變日期
 
-  //
   function changeDate(e) {
     props.setinputDate(new Date(e.target.value));
   }
+  
   return (
     <div className={styles.frame}>
       <div>

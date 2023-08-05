@@ -6,22 +6,29 @@ import Goods from "./Goods";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
 
-function ArrivalItem() {
+function ArrivalItem(props) {
+  const order = props.keys;
+  const idd = props.data.id;
+  const date = props.data.date;
+  const checks = props.data.f;
+  const content = props.data.g;
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
-        <CustomerData></CustomerData>
-        <CheckBoxes></CheckBoxes>
+        <CustomerData order={order} idd={idd} date={date}></CustomerData>
+        <CheckBoxes checks={checks}></CheckBoxes>
       </div>
-      <Goods></Goods>
-      <Goods></Goods>
+      {content.map((data, i, arr) => {
+        return <Goods key={i} data={data}></Goods>;
+      })}
+      {/* <Goods content={content}></Goods> */}
       <div className={styles.buttonDiv}>
         <button className={styles.checkBtn}>
-          <FontAwesomeIcon icon={faPen} className={styles.checkBtn_icon}/>
+          <FontAwesomeIcon icon={faPen} className={styles.checkBtn_icon} />
           驗收
         </button>
         <button className={styles.modifyBtn}>
-          <FontAwesomeIcon icon={faPen}  className={styles.modifyBtn_icon}/>
+          <FontAwesomeIcon icon={faPen} className={styles.modifyBtn_icon} />
           修改
         </button>
       </div>

@@ -22,5 +22,13 @@
       <div class="el3">element 3</div>
       <div class="el4">element 4</div>
     </div>
+    <script>
+      function f(content) {
+        setState((p) => {
+          let y = Object.assign({}, content);
+          return [y, ...p];
+        });
+      }
+    </script>
   </body>
 </html>

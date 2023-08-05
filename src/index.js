@@ -20,23 +20,31 @@ const arrivalitem = {
 };
 function Frame(props) {
   const [arrivallist, setarrivallist] = useState([]);
+
+  //*拿到資料並新增至"到貨列表"的陣列(arrivallist)中
   function getdata(id, date, checks, content) {
-    const data = {
-      id,
-      date,
-      checks,
-      content,
-    };
+    // function getdata(content) {
     setarrivallist((p) => {
-      return [data, ...p];
+      const g = content.map((o) => o);
+      const f = Object.values(checks);
+      const data = {
+        id,
+        date,
+        f,
+        g,
+        // content,
+      };
+      p.push(data);
+      p.reverse();
+      return [...p];
     });
-    console.log(data);
   }
+  // console.log(arrivallist);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Menu></Menu>
-      <ArrivalList></ArrivalList>
-      <AddArrivalItem getdata={getdata}></AddArrivalItem>
+      <ArrivalList data={arrivallist}></ArrivalList>
+      <AddArrivalItem getdata={getdata} h={arrivallist}></AddArrivalItem>
     </div>
   );
 }
