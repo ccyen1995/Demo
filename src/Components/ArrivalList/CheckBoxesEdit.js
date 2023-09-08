@@ -1,13 +1,16 @@
 import styles from "./CheckBoxesEdit.module.css";
-function CheckBoxesEdit(props) {
+import { useContext } from "react";
+import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
+function CheckBoxesEdit() {
+  const ctx = useContext(AddArrivalItem_context);
   //*setchecked
   function setChecked(e) {
     const inputId = e.target.id;
     const inputChecked = e.target.checked;
-    props.setcheckState((p) => {
+    ctx.setcheckState((p) => {
       p[inputId] = inputChecked;
-      console.log(p);
-      return p;
+      return { ...p };
+      //==不管是回傳新址物件或是原址物件都不影響，因為在index.js中會轉換成新的value陣列
     });
   }
   return (

@@ -23,14 +23,40 @@
   display: flex;
   align-items: center;
 }
+.filterDiv label {
+  white-space: nowrap;
+}
 .filterDiv {
   border-radius: 20px;
   background-color: #d9d9d9;
-  height: fit-content;
-  padding: 5px 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: flex;
   align-items: center;
+  /* opacity: 0; */
+  width: 0px;
+  height: 35px;
+  overflow: hidden;
+  /* color: transparent; */
+  transform: scale(0);
+  transition: 0.5s;
+}
+.filterDivact {
+  padding: 5px 10px;
+  /* animation: filterOpen 3s ease-in 1 forwards; */
+  width: 200px;
+  transform: scale(1);
+  opacity: 1;
+  transition: 0.5s;
+}
+@keyframes filterOpen {
+  0% {
+    width: 0px;
+    /* transform: scale(0); */
+  }
+  100% {
+    width: 200px;
+    /* transform: scale(2); */
+  }
 }
 .filterSelect {
   border-radius: 12px;

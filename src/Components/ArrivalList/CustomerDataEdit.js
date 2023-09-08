@@ -1,45 +1,57 @@
+import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 import styles from "./CustomerDataEdit.module.css";
-import { useState } from "react";
+import { useState, useContext, useReducer } from "react";
 
-function CustomerData(props) {
-  const date = props.inputDate.toISOString().substring(0, 10);
-  const [firsttype, setfirsttype] = useState(true);
-  const [isanyword, setisanyword] = useState(false);
-  const [long, setlong] = useState(true);
+const reducerfc = (state, action) => {
+  state[action.type] = action.val;
+  return { ...state };
+};
+
+function CustomerData() {
+  const ctx = useContext(AddArrivalItem_context);
+  const date = ctx.inputDate.toISOString().substring(0, 10);
+
+  const [inputstate, dispatchinputstate] = useReducer(reducerfc, {
+    firsttype: true,
+    isanyword: false,
+    long: true,
+  });
   //*改變customerid欄位
   function setid(e) {
-    props.setcustomerId(e.target.value);
-    setisanyword(true);
+    let value = e.target.value;
+    if ((/\d/.test(value) && value.length < 4) || value == "") {
+      ctx.setcustomerId(e.target.value);
+      dispatchinputstate({ type: "isanyword", val: true });
+    }
     if (e.target.value == "") {
-      setisanyword(false);
-      setlong(false);
+      dispatchinputstate({ type: "isanyword", val: false });
+      dispatchinputstate({ type: "long", val: false });
     }
   }
+
   //*清除customerid欄位，回歸到空值
   function clearid() {
-    if (firsttype) {
-      setlong(false);
-      setfirsttype(false);
-      props.setcustomerId("");
+    if (inputstate.firsttype) {
+      dispatchinputstate({ type: "long", val: false });
+      dispatchinputstate({ type: "firsttype", val: false });
+      ctx.setcustomerId("");
     }
   }
   //*裡面有字嗎?
   function anyword(e) {
     if (e.target.value == "") {
-      setisanyword(false);
+      dispatchinputstate({ type: "isanyword", val: false });
     }
-    if (!isanyword) {
-      setfirsttype(true);
-      setlong(true);
+    if (!inputstate.isanyword) {
+      dispatchinputstate({ type: "firsttype", val: true });
+      dispatchinputstate({ type: "long", val: true });
     }
-    return;
   }
   //*改變日期
-
   function changeDate(e) {
-    props.setinputDate(new Date(e.target.value));
+    ctx.setinputDate(new Date(e.target.value));
   }
-  
+
   return (
     <div className={styles.frame}>
       <div>
@@ -47,15 +59,16 @@ function CustomerData(props) {
         <div>
           <span>E -</span>
           <input
-            type="number"
+            type="text"
             id="CustomerData_CustomerId"
-            value={props.customerId}
+            value={ctx.customerId}
             onChange={setid}
             onClick={clearid}
             onBlur={anyword}
-            placeholder={!long ? "" : "客戶代號"}
-            className={isanyword || !long ? styles.opp : styles.op}
-            maxLength={3}
+            placeholder={!inputstate.long ? "" : "客戶代號"}
+            className={
+              inputstate.isanyword || !inputstate.long ? styles.opp : styles.op
+            }
           ></input>
         </div>
       </div>

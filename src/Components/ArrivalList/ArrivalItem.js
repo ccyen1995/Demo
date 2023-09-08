@@ -6,22 +6,18 @@ import Goods from "./Goods";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
 
-function ArrivalItem(props) {
-  const order = props.keys;
-  const idd = props.data.id;
-  const date = props.data.date;
-  const checks = props.data.f;
-  const content = props.data.g;
+function ArrivalItem({ keys, data, deleteListItem }) {
+  console.log(data);
+  const { id, date, checkvaluearr, newcontent } = data;
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
-        <CustomerData order={order} idd={idd} date={date}></CustomerData>
-        <CheckBoxes checks={checks}></CheckBoxes>
+        <CustomerData order={keys} id={id} date={date}></CustomerData>
+        <CheckBoxes checks={checkvaluearr}></CheckBoxes>
       </div>
-      {content.map((data, i, arr) => {
+      {newcontent.map((data, i, arr) => {
         return <Goods key={i} data={data}></Goods>;
       })}
-      {/* <Goods content={content}></Goods> */}
       <div className={styles.buttonDiv}>
         <button className={styles.checkBtn}>
           <FontAwesomeIcon icon={faPen} className={styles.checkBtn_icon} />
@@ -32,7 +28,12 @@ function ArrivalItem(props) {
           修改
         </button>
       </div>
-      <button className={styles.deleteBtn}>
+      <button
+        className={styles.deleteBtn}
+        onClick={() => {
+          deleteListItem(keys);
+        }}
+      >
         <FontAwesomeIcon icon={faXmark} />
       </button>
     </div>

@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function CheckBoxes(props) {
-  console.log(props);
   return (
     <div className={styles.frame}>
       {props.checks[0] ? (

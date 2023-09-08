@@ -1,0 +1,36 @@
+.frame p {
+  font-size: 1.2rem;
+}
+.frame {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 100px;
+  z-index: 11;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+}
+.buttons {
+  display: flex;
+  padding-top: 20px;
+}
+.buttons button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.confirm {
+  background-color: #7ed1ff;
+  margin-left: 30px;
+}
+.cancel {
+  background-color: #ff7b7b;
+}
