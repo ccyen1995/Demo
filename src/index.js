@@ -23,7 +23,9 @@ function Frame(props) {
   //*拿到資料並新增至"到貨列表"的陣列(arrivallist)中
   function getdata(id, date, checks, content) {
     setarrivallist((p) => {
-      const newcontent = content.map((o) => o);
+      const newcontent = content.map((o) => {
+        return o;
+      });
       const checkvaluearr = Object.values(checks);
       const data = {
         id,
@@ -47,7 +49,10 @@ function Frame(props) {
       {backdropState ? <Backdrop></Backdrop> : null}
       {confirmmodalState ? <CheckModal></CheckModal> : null}
       <Menu></Menu>
-      <ArrivalList data={arrivallist} deleteListItem={deleteListItem}></ArrivalList>
+      <ArrivalList
+        data={arrivallist}
+        deleteListItem={deleteListItem}
+      ></ArrivalList>
       <AddArrivalItem_context_Provider>
         <AddArrivalItem getdata={getdata} h={arrivallist}></AddArrivalItem>
       </AddArrivalItem_context_Provider>

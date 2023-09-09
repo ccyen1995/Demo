@@ -58,7 +58,6 @@ export const AddArrivalItem_context_Provider = (props) => {
         deletelistitem,
         setndatavalid,
         inputvalid,
-        ndatavalid,
       }}
     >
       {props.children}

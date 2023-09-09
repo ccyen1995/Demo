@@ -6,7 +6,7 @@ import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 function GoodsEdit(props) {
   const ctx = useContext(AddArrivalItem_context);
   const [ndata, setndata] = useState({
-    order: 0,
+    order: props.keys,
     mainname: "",
     subname: "",
     amount: 0,
@@ -30,7 +30,7 @@ function GoodsEdit(props) {
   useEffect(() => {
     //* 改變到貨陣列
     ctx.setcontent((p) => {
-      p[props.keys] = ndata;
+      p[props.keys] = Object.assign({}, ndata);
       return [...p];
     });
     //*判斷是否有效

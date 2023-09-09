@@ -1,6 +1,5 @@
 import styles from "./CustomerData.module.css";
 function CustomerData({ order, id, date }) {
-  console.log(id);
   return (
     <div className={styles.frame}>
       <div className={styles.div_1}>

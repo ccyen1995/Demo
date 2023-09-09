@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
 
 function ArrivalItem({ keys, data, deleteListItem }) {
-  console.log(data);
   const { id, date, checkvaluearr, newcontent } = data;
   return (
     <div className={styles.frame}>
