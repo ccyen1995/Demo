@@ -1,12 +1,22 @@
+import { useContext } from "react";
 import styles from "./ArrivalItem.module.css";
 import CustomerData from "./CustomerData";
 import CheckBoxes from "./CheckBoxes";
 import Goods from "./Goods";
+import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
 
-function ArrivalItem({ keys, data, deleteListItem }) {
+function ArrivalItem({ keys, data }) {
+  const ctx = useContext(AddArrivalItem_context);
+
+  function deleteListItem(n) {
+    ctx.setarrivallist((p) => {
+      p.splice(n, 1);
+      return [...p];
+    });
+  }
   const { id, date, checkvaluearr, newcontent } = data;
   return (
     <div className={styles.frame}>

@@ -14,6 +14,7 @@ export const AddArrivalItem_context_Provider = (props) => {
   const [inputDate, setinputDate] = useState(new Date());
   const [ndatavalid, setndatavalid] = useState(false);
   const [inputvalid, setinputvalid] = useState(false);
+  const [arrivallist, setarrivallist] = useState([]);
   //*新增到貨品項
   function addlistitem() {
     //*加入到陣列
@@ -58,6 +59,8 @@ export const AddArrivalItem_context_Provider = (props) => {
         deletelistitem,
         setndatavalid,
         inputvalid,
+        arrivallist,
+        setarrivallist,
       }}
     >
       {props.children}

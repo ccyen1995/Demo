@@ -1,8 +1,7 @@
 import classes from "./CheckModal.module.css";
-import { confirmmodalActions } from "../../Store/confirmmodal_slis";
-import { backdropActions } from "../../Store/backdrop_slis";
+import { confirmmodalActions } from "../../Store/confirmmodal_slice";
+import { backdropActions } from "../../Store/backdrop_slice";
 import { useDispatch } from "react-redux";
-
 const CheckModal = () => {
   const dispatch = useDispatch();
   function confirmHandler() {

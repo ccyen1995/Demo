@@ -1,6 +1,6 @@
 import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 import styles from "./CustomerDataEdit.module.css";
-import { useState, useContext, useReducer } from "react";
+import { useContext, useReducer } from "react";
 
 const reducerfc = (state, action) => {
   state[action.type] = action.val;

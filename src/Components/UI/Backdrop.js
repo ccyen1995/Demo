@@ -1,5 +1,5 @@
 import classes from "./Backdrop.module.css";
-import { backdropActions } from "../../Store/backdrop_slis";
+import { backdropActions } from "../../Store/backdrop_slice";
 import { useDispatch } from "react-redux";
 
 const Backdrop = () => {

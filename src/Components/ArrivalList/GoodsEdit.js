@@ -27,6 +27,7 @@ function GoodsEdit(props) {
       return { ...p };
     });
   }
+
   useEffect(() => {
     //* 改變到貨陣列
     ctx.setcontent((p) => {

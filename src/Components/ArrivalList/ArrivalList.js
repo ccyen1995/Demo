@@ -1,13 +1,26 @@
-import styles from "./ArrivalList.module.css";
-import ArrivalItem from "./ArrivalItem";
 import { useState } from "react";
+import styles from "./ArrivalList.module.css";
+import { useDispatch, useSelector } from "react-redux";
+//==component
+import ArrivalItem from "./ArrivalItem";
+//==icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
+//==state
+import { useContext } from "react";
+import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 
-function ArrivalList(props) {
+function ArrivalList() {
+  const ctx = useContext(AddArrivalItem_context);
   const [selectedID, setselectedID] = useState("");
-  const r = props.data.map((data) => data.id);
-  let set1 = [...new Set(r)].reverse();
+  const dataID = ctx.arrivallist.map((data) => data.id);
+  let set1 = [...new Set(dataID)].reverse();
+  //==
+
+  const list = useSelector((s) => s.arrivallistdata);
+  console.log(list);
+
+  //==
   //*設置篩選器內容
   function selectoroptionHandler(e) {
     if (e.target.value == "None") {
@@ -21,21 +34,17 @@ function ArrivalList(props) {
   function filteranimation() {
     setfilteranimate(!filteranimate);
   }
+
   return (
     <div className={styles.frame}>
       <div className={styles.innerFrame}>
-        {props.data.map((data, i, arr) => {
-          if (selectedID == "" || data.id == y) {
-            return (
-              <ArrivalItem
-                key={i}
-                keys={i}
-                data={data}
-                deleteListItem={props.deleteListItem}
-              ></ArrivalItem>
-            );
-          }
-        })}
+        {ctx.arrivallist
+          .map((data, i, arr) => {
+            if (selectedID == "" || data.id == selectedID) {
+              return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>;
+            }
+          })
+          .reverse()}
       </div>
       <div className={styles.filterSec}>
         <div

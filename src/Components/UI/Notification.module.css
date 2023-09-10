@@ -1,0 +1,40 @@
+.notification {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background-color: #1a8ed1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: #fff;
+  animation: moveani 1.2s ease-in forwards;
+}
+@keyframes moveani {
+  0% {
+    top: -60px;
+  }
+  25% {
+    top: 0px;
+  }
+  75% {
+    top: 0px;
+  }
+  100% {
+    top: -60px;
+  }
+}
+.notification h2,
+.notification p {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.error {
+  background-color: #690000;
+}
+
+.success {
+  background-color: #1ad1b9;
+}
