@@ -19,7 +19,8 @@ function CustomerData() {
   //*改變customerid欄位
   function setid(e) {
     let value = e.target.value;
-    if ((/\d/.test(value) && value.length < 4) || value == "") {
+    // console.log(/^\d+$/.test(value));
+    if ((/^\d+$/.test(value) && value.length < 4) || value == "") {
       ctx.setcustomerId(e.target.value);
       dispatchinputstate({ type: "isanyword", val: true });
     }

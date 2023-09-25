@@ -2,14 +2,13 @@ import { uiActions } from "./ui_slice";
 
 export const sandArrivallistData = (data) => {
   const newinputDate = data.inputDate.toLocaleDateString().replace(/\//g, "-");
-
-  console.log(newinputDate);
+  const datenow = Date.now();
   return async (dispatch) => {
     const sendRequest = async () => {
       const response = await fetch(
-        `https://fir-ad5df-default-rtdb.firebaseio.com/arrivallist/${newinputDate}.json`,
+        `https://fir-ad5df-default-rtdb.firebaseio.com/arrivallist/${newinputDate}/${datenow}.json?`,
         {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify(data),
         }
       );

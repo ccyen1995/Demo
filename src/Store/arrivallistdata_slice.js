@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = { update: true, arrivallistdata: [] };
 
 const arrivallistdataState = createSlice({
   name: "arrivallistdata",
   initialState,
   reducers: {
-    additem(state, action) {
-      state = action.payload;
-      return state;
+    converitem(state, action) {
+      state.arrivallistdata = action.payload;
+      // return state;
+    },
+    turnfalse(state) {
+      state.update = false;
+      // return state;
+    },
+    turntrue(state) {
+      state.update = true;
+      // return state;
     },
   },
 });

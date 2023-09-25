@@ -13,29 +13,13 @@ import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
 import { confirmmodalActions } from "../../Store/confirmmodal_slice";
 import { backdropActions } from "../../Store/backdrop_slice";
 import { sandArrivallistData } from "../../Store/senddata_actions";
+import { arrivallistdataActions } from "../../Store/arrivallistdata_slice";
 
 function AddArrivalItem() {
   const ctx = useContext(AddArrivalItem_context);
-  const { customerId, inputDate, checkState, content } = ctx;
   const dispatch = useDispatch();
   //*拿到資料並新增至"到貨列表"的陣列(arrivallist)中
-  function getdata(id, date, checks, content) {
-    ctx.setarrivallist((p) => {
-      const newcontent = content.map((o) => o);
-      const checkvaluearr = Object.values(checks);
-      const data = {
-        id,
-        date,
-        newcontent,
-        checkvaluearr,
-      };
-      p.push(data);
-      return [...p];
-    });
-  }
-
   const submitHandler = () => {
-    getdata(customerId, inputDate, checkState, content);
     const newcontent = content.map((o) => o);
     const checkvaluearr = Object.values(checkState);
     const data = {
@@ -45,6 +29,13 @@ function AddArrivalItem() {
       checkvaluearr,
     };
     dispatch(sandArrivallistData(data));
+    dispatch(arrivallistdataActions.turntrue());
+  };
+
+  const clearHandler = () => {
+    dispatch(confirmmodalActions.show());
+    dispatch(backdropActions.show());
+    dispatch(confirmmodalActions.switch("clearInput"));
   };
   return (
     <form
@@ -69,12 +60,7 @@ function AddArrivalItem() {
         <button
           type="button"
           className={styles.checkBtn}
-          onClick={() => {
-            ctx.setclear(true);
-            ctx.setcontent([]);
-            dispatch(confirmmodalActions.show());
-            dispatch(backdropActions.show());
-          }}
+          onClick={clearHandler}
         >
           <FontAwesomeIcon icon={faPen} className={styles.checkBtn_icon} />
           清空

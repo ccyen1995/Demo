@@ -3,25 +3,28 @@ import styles from "./ArrivalItem.module.css";
 import CustomerData from "./CustomerData";
 import CheckBoxes from "./CheckBoxes";
 import Goods from "./Goods";
-import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPen } from "@fortawesome/free-solid-svg-icons";
-
+import { useSelector, useDispatch } from "react-redux";
+import { confirmmodalActions } from "../../Store/confirmmodal_slice";
+import { backdropActions } from "../../Store/backdrop_slice";
 function ArrivalItem({ keys, data }) {
-  const ctx = useContext(AddArrivalItem_context);
-
-  function deleteListItem(n) {
-    ctx.setarrivallist((p) => {
-      p.splice(n, 1);
-      return [...p];
-    });
+  const dispatch = useDispatch();
+  function deleteListItem(keys) {
+    dispatch(confirmmodalActions.show());
+    dispatch(backdropActions.show());
+    dispatch(confirmmodalActions.switch("deleteitem"));
   }
-  const { id, date, checkvaluearr, newcontent } = data;
+  const { checkvaluearr, customerId, inputDate, newcontent } = data;
+
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
-        <CustomerData order={keys} id={id} date={date}></CustomerData>
+        <CustomerData
+          order={keys}
+          id={customerId}
+          date={inputDate}
+        ></CustomerData>
         <CheckBoxes checks={checkvaluearr}></CheckBoxes>
       </div>
       {newcontent.map((data, i, arr) => {

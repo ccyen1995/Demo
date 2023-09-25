@@ -16,7 +16,7 @@ function CustomerData({ order, id, date }) {
       </div>
       <div className={styles.div_4}>
         <p>入庫日期</p>
-        <p>{date.toLocaleDateString()}</p>
+        <p>{date.slice(0, 10).replace(/\-/g, "/")}</p>
       </div>
     </div>
   );

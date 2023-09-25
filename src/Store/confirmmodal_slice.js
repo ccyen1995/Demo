@@ -1,14 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = { connectSwitch: "", show: false, btnname: "" };
+
 const confirmmodal = createSlice({
   name: "confirmmodalState",
-  initialState: false,
+  initialState,
   reducers: {
     show(state) {
-      return (state = true);
+      state.show = true;
+      return state;
     },
     hide(state) {
-      return (state = false);
+      state.show = false;
+      return state;
+    },
+    switch(state, action) {
+      state.connectSwitch = action.payload;
+      if (action.payload == "clearInput") {
+        state.btnname = "清空";
+      }
+      return state;
+    },
+    reset(state, action) {
+      if (action.payload == "reset") {
+        state.connectSwitch = "";
+      }
+      return state;
     },
   },
 });

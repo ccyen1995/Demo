@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./ArrivalList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 //==component
@@ -7,18 +7,32 @@ import ArrivalItem from "./ArrivalItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
 //==state
-import { useContext } from "react";
-import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
+import { getArrivallistData } from "../../Store/fetchdata_actions";
+import { arrivallistdataActions } from "../../Store/arrivallistdata_slice";
 
 function ArrivalList() {
-  const ctx = useContext(AddArrivalItem_context);
+  const dispatch = useDispatch();
+  const list = useSelector((s) => s.arrivallistdata.arrivallistdata);
+  const updatestate = useSelector((s) => s.arrivallistdata.update);
+
+  console.log(list);
+
+  useEffect(() => {
+    dispatch(getArrivallistData());
+    dispatch(arrivallistdataActions.turnfalse());
+  }, [updatestate]);
+
+  //?不斷重複渲染
+  const nestlist = list.map((data) => {
+    const dateclass = Object.keys(data)[0];
+    const renderdata = data[dateclass];
+    return renderdata;
+  });
+  const correctData = nestlist.flat();
   const [selectedID, setselectedID] = useState("");
-  const dataID = ctx.arrivallist.map((data) => data.id);
+  const dataID = correctData.map((data) => data.customerId);
   let set1 = [...new Set(dataID)].reverse();
   //==
-
-  const list = useSelector((s) => s.arrivallistdata);
-  console.log(list);
 
   //==
   //*設置篩選器內容
@@ -38,13 +52,19 @@ function ArrivalList() {
   return (
     <div className={styles.frame}>
       <div className={styles.innerFrame}>
-        {ctx.arrivallist
-          .map((data, i, arr) => {
+        {correctData.map((data, i) => {
+          if (selectedID == "" || data.id == selectedID) {
+            return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>;
+          }
+        })}
+        {/*context練習 */}
+        {/* {ctx.arrivallist
+          .map((data, i) => {
             if (selectedID == "" || data.id == selectedID) {
               return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>;
             }
           })
-          .reverse()}
+          .reverse()} */}
       </div>
       <div className={styles.filterSec}>
         <div
