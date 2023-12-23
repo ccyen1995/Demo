@@ -1,6 +1,6 @@
-import styles from "./Goods.module.css";
+import styles from './Goods.module.css'
 function Goods({ data }) {
-  const { order, mainname, subname, amount } = data;
+  const { order, mainname, subname, amount } = data
   return (
     <div className={styles.frame}>
       <div className={styles.space}></div>
@@ -11,6 +11,6 @@ function Goods({ data }) {
         <span>{amount}件</span>
       </div>
     </div>
-  );
+  )
 }
-export default Goods;
+export default Goods

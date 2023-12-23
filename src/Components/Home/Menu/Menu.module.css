@@ -1,9 +1,10 @@
 .frame {
   background-color: #96e2e2;
-  width: 123px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 }
 .menuLink {
   display: flex;
@@ -25,4 +26,8 @@
   font-size: 1.2rem;
   border: transparent solid 2px;
   cursor: pointer;
+}
+
+.menuLink a.active {
+  color: #6df0f0;
 }

@@ -1,54 +1,56 @@
-import { useEffect } from "react";
-import { createRoot } from "react-dom/client";
-import { useSelector, useDispatch } from "react-redux";
-import { Provider } from "react-redux";
-import "./index.css";
-import store from "./Store/Store";
-//==component
-import Menu from "./Components/Menu/Menu";
-import ArrivalList from "./Components/ArrivalList/ArrivalList";
-import AddArrivalItem from "./Components/ArrivalList/AddArrivalItem";
-//==state
-import { AddArrivalItem_context_Provider } from "./Context/AddArrivalItem_context";
-import { uiActions } from "./Store/ui_slice";
-//==UI
-import Backdrop from "./Components/UI/Backdrop";
-import CheckModal from "./Components/UI/CheckModal";
-import Notification from "./Components/UI/Notification";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createRoot } from 'react-dom/client'
+import { Provider } from 'react-redux'
+import store from './Store/Store'
+import Purchase from './Components/Purchase/Purchase'
+import Stock from './Components/Stock/Stock'
+import Ship from './Components/Ship/Ship'
+import Client from './Components/Client/Client'
+import User from './Components/User/User'
+import Home from './Components/Home/Home'
+import ErrorRoute from './Components/Error/ErrorRoute'
 
-const container = document.getElementById("root");
-const root = createRoot(container);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Home></Home>,
+    errorElement: <ErrorRoute></ErrorRoute>,
+    children: [
+      { path: '/', element: <h1>歡迎使用倉儲系統</h1> },
+      {
+        path: 'purchase',
+        element: (
+          <Provider store={store}>
+            <Purchase></Purchase>
+          </Provider>
+        ),
+        loader: () => {
+          return null
+        }
+      },
+      {
+        path: 'stock',
+        element: <Stock></Stock>
+      },
+      {
+        path: 'ship',
+        element: <Ship></Ship>
+      },
+      {
+        path: 'client',
+        element: <Client></Client>
+      },
+      {
+        path: 'user',
+        element: <User></User>
+      }
+    ]
+  }
+])
 
-function Frame() {
-  const backdropState = useSelector((state) => state.backdrop);
-  const confirmmodalState = useSelector((state) => state.confirmmodal.show);
-  const uiState = useSelector((state) => state.ui);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    //*等動畫跑完再讓提示方塊消失
-    setTimeout(() => {
-      dispatch(uiActions.hide());
-    }, 1200);
-  }, [uiState.show]);
-  return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      {uiState.show ? (
-        <Notification res={uiState.notification}></Notification>
-      ) : null}
-      {backdropState ? <Backdrop></Backdrop> : null}
-      <Menu></Menu>
-      <ArrivalList></ArrivalList>
-      <AddArrivalItem_context_Provider>
-        {confirmmodalState ? <CheckModal></CheckModal> : null}
-        <AddArrivalItem></AddArrivalItem>
-      </AddArrivalItem_context_Provider>
-    </div>
-  );
+function App() {
+  return <RouterProvider router={router}></RouterProvider>
 }
-
-root.render(
-  <Provider store={store}>
-    <Frame></Frame>
-  </Provider>
-);
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(<App></App>)

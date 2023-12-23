@@ -1,6 +1,6 @@
-import styles from "./CheckBoxes.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import styles from './CheckBoxes.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 function CheckBoxes(props) {
   return (
@@ -24,7 +24,7 @@ function CheckBoxes(props) {
         </div>
       ) : null}
     </div>
-  );
+  )
 }
 
-export default CheckBoxes;
+export default CheckBoxes

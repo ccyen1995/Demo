@@ -1,4 +1,4 @@
-import styles from "./CustomerData.module.css";
+import styles from './CustomerData.module.css'
 function CustomerData({ order, id, date }) {
   return (
     <div className={styles.frame}>
@@ -16,9 +16,9 @@ function CustomerData({ order, id, date }) {
       </div>
       <div className={styles.div_4}>
         <p>入庫日期</p>
-        <p>{date.slice(0, 10).replace(/\-/g, "/")}</p>
+        <p>{date.slice(0, 10).replace(/-/g, '/')}</p>
       </div>
     </div>
-  );
+  )
 }
-export default CustomerData;
+export default CustomerData

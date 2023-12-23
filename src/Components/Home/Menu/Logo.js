@@ -1,5 +1,5 @@
-import wmsImg from "../../img/inventory.png";
-import styles from "./Logo.module.css";
+import wmsImg from '../../../img/inventory.png'
+import styles from './Logo.module.css'
 
 function Logo() {
   return (
@@ -9,7 +9,7 @@ function Logo() {
       </div>
       <p>WMS</p>
     </div>
-  );
+  )
 }
 
-export default Logo;
+export default Logo
