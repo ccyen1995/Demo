@@ -1,34 +1,46 @@
 import { useState, useEffect } from 'react'
 import styles from './ArrivalList.module.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLoaderData } from 'react-router-dom'
 //= =component
 import ArrivalItem from './ArrivalItem'
 //= =icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
 //= =state
-import { getArrivallistData } from '../../../Store/fetchdata_actions'
-import { arrivallistdataActions } from '../../../Store/arrivallistdata_slice'
+
+import { arrivallistdataActions } from '../../../Store/slices/arrivallistdata_slice'
 
 function ArrivalList() {
   const dispatch = useDispatch()
+  //* loader載入資料
+  const loaderdata = useLoaderData()
+  // ?List在第二次選渲染時與第一次的loaderdata不一樣
   const list = useSelector((s) => s.arrivallistdata.arrivallistdata)
-  const updatestate = useSelector((s) => s.arrivallistdata.update)
-  //* 每次渲染之前先取得最新資料
-  useEffect(() => {
-    dispatch(getArrivallistData()) //* fetch在這裡
 
-    dispatch(arrivallistdataActions.turnfalse())
-  }, [updatestate])
+  useEffect(() => {
+    if (list.length === 0) {
+      dispatch(arrivallistdataActions.converitem(loaderdata))
+    }
+  }, [])
   // ?不斷重複渲染
   //= ===
-
   //* 轉換資料結構
-  const nestlist = list.map((data) => {
-    const dateclass = Object.keys(data)[0]
-    const renderdata = data[dateclass]
-    return renderdata
-  })
+  function makenestdata(datas) {
+    const nestlist = datas.map((data) => {
+      const dateclass = Object.keys(data)[0]
+      const renderdata = data[dateclass]
+      return renderdata
+    })
+    return nestlist
+  }
+  let nestlist
+  if (list.length === 0) {
+    nestlist = makenestdata(loaderdata)
+    // console.log('list length = 0')
+  } else {
+    nestlist = makenestdata(list)
+  }
   const correctData = nestlist.flat().map((it) => {
     const timestamp = Object.getOwnPropertyNames(it)[0]
     // console.log(Object.isExtensible(it));
@@ -46,7 +58,7 @@ function ArrivalList() {
 
   //* 設置篩選器內容
   function selectoroptionHandler(e) {
-    if (e.target.value === 'None') {
+    if (e.target.value === '全選') {
       setselectedID('')
     } else {
       setselectedID(e.target.value.slice(1))
@@ -57,24 +69,15 @@ function ArrivalList() {
   function filteranimation() {
     setfilteranimate(!filteranimate)
   }
-  // return;
   return (
     <div className={styles.frame}>
       <div className={styles.innerFrame}>
         {correctData.map((data, i) => {
-          if (selectedID === '' || data.id === selectedID) {
+          if (selectedID === '' || data.customerId === selectedID) {
             return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>
           }
           return null
         })}
-        {/* context練習 */}
-        {/* {ctx.arrivallist
-          .map((data, i) => {
-            if (selectedID == "" || data.id == selectedID) {
-              return <ArrivalItem key={i} keys={i} data={data}></ArrivalItem>;
-            }
-          })
-          .reverse()} */}
       </div>
       <div className={styles.filterSec}>
         <div
@@ -88,19 +91,11 @@ function ArrivalList() {
             className={styles.filterSelect}
             onChange={selectoroptionHandler}
           >
-            <option>None</option>
+            <option>{set1.length > 0 ? '全選' : '無'}</option>
             {set1.map((n, i) => (
               <option key={i}>{'E' + n}</option>
             ))}
           </select>
-          <button
-            className={styles.selectDeleteBtn}
-            onClick={() => {
-              setselectedID('')
-            }}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
         </div>
         <button className={styles.filterBtn} onClick={filteranimation}>
           <FontAwesomeIcon icon={faFilter} />
@@ -110,3 +105,33 @@ function ArrivalList() {
   )
 }
 export default ArrivalList
+
+export const ArrivalList_Loader = async () => {
+  const sendRequest = async () => {
+    const response = await fetch(
+      'https://fir-ad5df-default-rtdb.firebaseio.com/arrivallist.json?'
+    )
+
+    if (!response.ok) {
+      throw new Error('getting data failed.')
+    }
+    const data = await response.json()
+    return data
+  }
+  let y
+
+  try {
+    const data = await sendRequest()
+    if (data == null) return []
+    // *轉為陣列
+    y = Object.entries(data).map((it) => {
+      const k = Object.entries(it[1]).map((itt) => {
+        return { [itt[0]]: itt[1] }
+      })
+      return { [it[0]]: k }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+  return y
+}

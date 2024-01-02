@@ -1,5 +1,6 @@
 import styles from './CustomerData.module.css'
 function CustomerData({ order, id, date }) {
+  // console.log(date)
   return (
     <div className={styles.frame}>
       <div className={styles.div_1}>
@@ -16,7 +17,7 @@ function CustomerData({ order, id, date }) {
       </div>
       <div className={styles.div_4}>
         <p>入庫日期</p>
-        <p>{date.slice(0, 10).replace(/-/g, '/')}</p>
+        <p>{date.slice(1, 11).replace(/-/g, '/')}</p>
       </div>
     </div>
   )

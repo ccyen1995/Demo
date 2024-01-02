@@ -17,14 +17,7 @@ export const getArrivallistData = () => {
     try {
       const data = await sendRequest()
       if (data == null) throw Error('data is null')
-      // *轉為陣列
-      const y = Object.entries(data).map((it) => {
-        const k = Object.entries(it[1]).map((itt) => {
-          return { [itt[0]]: itt[1] }
-        })
-        return { [it[0]]: k }
-      })
-      dispatch(arrivallistdataActions.converitem(y))
+      dispatch(arrivallistdataActions.converitem(data))
     } catch (error) {
       console.log(error)
     }

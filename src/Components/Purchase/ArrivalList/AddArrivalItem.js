@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './AddArrivalItem.module.css'
 // ==component
 import GoodsEdit from './GoodsEdit'
@@ -11,33 +11,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 // ==state
 import AddArrivalItem_context from '../../../Context/AddArrivalItem_context'
-import { confirmmodalActions } from '../../../Store/confirmmodal_slice'
-import { backdropActions } from '../../../Store/backdrop_slice'
-import { sandArrivallistData } from '../../../Store/senddata_actions'
-import { arrivallistdataActions } from '../../../Store/arrivallistdata_slice'
-
+import { confirmmodalActions } from '../../../Store/slices/confirmmodal_slice'
+import { backdropActions } from '../../../Store/slices/backdrop_slice'
+import { sandArrivallistData } from '../../../Store/actions/senddata_actions'
+import { arrivallistdataActions } from '../../../Store/slices/arrivallistdata_slice'
 function AddArrivalItem() {
-  const ctx = useContext(AddArrivalItem_context)
   const dispatch = useDispatch()
+  const ctx = useContext(AddArrivalItem_context)
+  console.log(ctx)
   //* 拿到資料並新增至"到貨列表"的陣列(arrivallist)中
   const submitHandler = () => {
     const { content, checkState, inputDate, customerId } = ctx
     const newcontent = content.map((o) => o)
     const checkvaluearr = Object.values(checkState)
+    const newinputDate = JSON.stringify(inputDate)
+
     const data = {
       customerId,
-      inputDate,
+      newinputDate,
       newcontent,
       checkvaluearr
     }
     dispatch(sandArrivallistData({ data, extra: '' }))
-    dispatch(arrivallistdataActions.turntrue())
   }
 
   const clearHandler = () => {
     dispatch(confirmmodalActions.show())
     dispatch(backdropActions.show())
-    dispatch(confirmmodalActions.switch('clearInput'))
+    dispatch(confirmmodalActions.switch({ switch: 'clearInput' }))
   }
   return (
     <form
@@ -58,6 +59,7 @@ function AddArrivalItem() {
         }
         return <GoodsEdit key={i} keys={i} isbtn={isbtn}></GoodsEdit>
       })}
+
       <div className={styles.buttonDiv}>
         <button
           type="button"

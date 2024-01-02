@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import backdropReducer from './backdrop_slice'
-import confirmmodalReducer from './confirmmodal_slice'
-import uiReducer from './ui_slice'
-import arrivallistdataReducer from './arrivallistdata_slice'
+import backdropReducer from './slices/backdrop_slice'
+import confirmmodalReducer from './slices/confirmmodal_slice'
+import uiReducer from './slices/ui_slice'
+import arrivallistdataReducer from './slices/arrivallistdata_slice'
 
 const store = configureStore({
   reducer: {

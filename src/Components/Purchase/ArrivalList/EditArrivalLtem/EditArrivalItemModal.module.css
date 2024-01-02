@@ -1,0 +1,21 @@
+.frame {
+  background-color: white;
+  padding: 30px;
+  /* margin: auto; */
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+.div1 {
+  display: flex;
+}
+.btndiv {
+  display: flex;
+  background-color: aqua;
+  justify-content: space-evenly;
+  padding: 10px;
+}

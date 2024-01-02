@@ -1,13 +1,16 @@
-import classes from "./Backdrop.module.css";
-import { backdropActions } from "../../Store/backdrop_slice";
-import { useDispatch } from "react-redux";
-
+import classes from './Backdrop.module.css'
+import { backdropActions } from '../../Store/slices/backdrop_slice'
+import { useDispatch } from 'react-redux'
+import { arrivallistdataActions } from '../../Store/slices/arrivallistdata_slice'
+import { confirmmodalActions } from '../../Store/slices/confirmmodal_slice'
 const Backdrop = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const clickHandler = () => {
-    dispatch(backdropActions.hide());
-  };
-  return <div className={classes.backdrop} onClick={clickHandler}></div>;
-};
+    dispatch(backdropActions.hide())
+    dispatch(arrivallistdataActions.editListdata({ editing: false }))
+    dispatch(confirmmodalActions.hide())
+  }
+  return <div className={classes.backdrop} onClick={clickHandler}></div>
+}
 
-export default Backdrop;
+export default Backdrop

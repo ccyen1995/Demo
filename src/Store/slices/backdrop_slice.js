@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
-// const initialState = { statte: false };
+
 const backdropState = createSlice({
   name: 'backdrop',
   initialState: false,
   reducers: {
     show(state) {
-      // state.statte = true;
+      // ==state非物件的話必須有回傳值
+      // ==state = false
       return (state = true)
     },
     hide(state) {
-      // state.statte = false;
+      // ==state非物件的話必須有回傳值
+      // ==state = false
       return (state = false)
     }
   }

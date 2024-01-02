@@ -10,6 +10,8 @@ import User from './Components/User/User'
 import Home from './Components/Home/Home'
 import ErrorRoute from './Components/Error/ErrorRoute'
 
+import { ArrivalList_Loader } from './Components/Purchase/ArrivalList/ArrivalList'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,14 +21,8 @@ const router = createBrowserRouter([
       { path: '/', element: <h1>歡迎使用倉儲系統</h1> },
       {
         path: 'purchase',
-        element: (
-          <Provider store={store}>
-            <Purchase></Purchase>
-          </Provider>
-        ),
-        loader: () => {
-          return null
-        }
+        element: <Purchase></Purchase>,
+        loader: ArrivalList_Loader
       },
       {
         path: 'stock',
@@ -49,7 +45,11 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
+  )
 }
 const container = document.getElementById('root')
 const root = createRoot(container)

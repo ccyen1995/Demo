@@ -1,20 +1,20 @@
 import { createContext, useState, useEffect } from 'react'
 
 const AddArrivalItem_context = createContext({})
-
+// ==預設context的內容是提供給未用Provider元件包覆的元件需要此context的state時使用的
 export const AddArrivalItem_context_Provider = (props) => {
   const [clear, setclear] = useState(false)
   const [content, setcontent] = useState([])
-  const [checkState, setcheckState] = useState({
-    transcribeweight: false,
-    mixpallet: false,
-    classifyexpiry: false
-  })
   const [customerId, setcustomerId] = useState('')
   const [inputDate, setinputDate] = useState(new Date())
   const [ndatavalid, setndatavalid] = useState(false)
   const [inputvalid, setinputvalid] = useState(false)
   const [arrivallist, setarrivallist] = useState([])
+  const [checkState, setcheckState] = useState({
+    transcribeweight: false,
+    mixpallet: false,
+    classifyexpiry: false
+  })
   //* 新增到貨品項
   function addlistitem() {
     //* 加入到陣列
@@ -69,6 +69,7 @@ export const AddArrivalItem_context_Provider = (props) => {
 }
 
 export default AddArrivalItem_context
+
 // ==export { AddArrivalItem_context_Provider };也可以
 
 // ==產生新物件(new reference)就會跳出不正常渲染警告

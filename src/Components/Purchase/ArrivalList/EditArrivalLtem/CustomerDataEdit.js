@@ -1,4 +1,4 @@
-import AddArrivalItem_context from '../../../Context/AddArrivalItem_context'
+import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
 import styles from './CustomerDataEdit.module.css'
 import { useContext, useReducer } from 'react'
 

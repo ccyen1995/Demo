@@ -1,6 +1,6 @@
 import styles from './CheckBoxesEdit.module.css'
 import { useContext } from 'react'
-import AddArrivalItem_context from '../../../Context/AddArrivalItem_context'
+import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
 function CheckBoxesEdit() {
   const ctx = useContext(AddArrivalItem_context)
   //* setchecked

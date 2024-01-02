@@ -1,39 +1,47 @@
-import classes from "./CheckModal.module.css";
-import { confirmmodalActions } from "../../Store/confirmmodal_slice";
-import { backdropActions } from "../../Store/backdrop_slice";
-import { useDispatch, useSelector } from "react-redux";
-import { useContext } from "react";
-import AddArrivalItem_context from "../../Context/AddArrivalItem_context";
-import { sandArrivallistData } from "../../Store/senddata_actions";
-import { arrivallistdataActions } from "../../Store/arrivallistdata_slice";
+import classes from './CheckModal.module.css'
+import { confirmmodalActions } from '../../Store/slices/confirmmodal_slice'
+import { backdropActions } from '../../Store/slices/backdrop_slice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useContext } from 'react'
+import AddArrivalItem_context from '../../Context/AddArrivalItem_context'
+import { sandArrivallistData } from '../../Store/actions/senddata_actions'
+import { arrivallistdataActions } from '../../Store/slices/arrivallistdata_slice'
+
 const CheckModal = () => {
-  const ctx = useContext(AddArrivalItem_context);
-  const confirmstate = useSelector((s) => s.confirmmodal);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const ctx = useContext(AddArrivalItem_context)
+  const confirmstate = useSelector((s) => s.confirmmodal)
+
   function confirmHandler() {
     // console.log(confirmstate.connectSwitch);
     switch (confirmstate.connectSwitch) {
-      case "clearInput":
-        ctx.setclear(true);
-        ctx.setcontent([]);
-        dispatch(confirmmodalActions.reset("reset"));
-        break;
-      case "deletelistitem":
-        dispatch(arrivallistdataActions.turntrue());
+      case 'clearInput':
+        ctx.setcheckState({
+          transcribeweight: false,
+          mixpallet: false,
+          classifyexpiry: false
+        })
+        ctx.setinputDate(new Date())
+        ctx.setclear(true)
+        ctx.setcustomerId('')
+        ctx.setcontent([])
+
+        break
+      case 'deletelistitem':
         dispatch(
           sandArrivallistData({
             data: confirmstate.extra,
-            extra: "deletelistitem",
+            extra: 'deletelistitem'
           })
-        );
-        break;
+        )
+        break
     }
-    dispatch(confirmmodalActions.hide());
-    dispatch(backdropActions.hide());
+    dispatch(confirmmodalActions.hide())
+    dispatch(backdropActions.hide())
   }
   function cancelHandler() {
-    dispatch(confirmmodalActions.hide());
-    dispatch(backdropActions.hide());
+    dispatch(confirmmodalActions.hide())
+    dispatch(backdropActions.hide())
   }
 
   return (
@@ -48,6 +56,6 @@ const CheckModal = () => {
         </button>
       </div>
     </div>
-  );
-};
-export default CheckModal;
+  )
+}
+export default CheckModal
