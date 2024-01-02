@@ -1,17 +1,20 @@
 import styles from './CheckBoxesEdit.module.css'
 import { useContext } from 'react'
 import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
-function CheckBoxesEdit() {
-  const ctx = useContext(AddArrivalItem_context)
+import { useDispatch } from 'react-redux'
+import { arrivallistdataActions } from '../../../../Store/slices/arrivallistdata_slice'
+function CheckBoxesEdit(props) {
+  const dispatch = useDispatch()
+
   //* setchecked
   function setChecked(e) {
-    const inputId = e.target.id
     const inputChecked = e.target.checked
-    ctx.setcheckState((p) => {
-      p[inputId] = inputChecked
-      return { ...p }
-      // ==不管是回傳新址物件或是原址物件都不影響，因為在index.js中會轉換成新的value陣列
-    })
+    dispatch(
+      arrivallistdataActions.editListdata({
+        type: 'checkboxes',
+        value: inputChecked
+      })
+    )
   }
   return (
     <div className={styles.frame}>
@@ -19,7 +22,7 @@ function CheckBoxesEdit() {
         <input
           type="checkbox"
           id="transcribeweight"
-          checked={ctx.checkState.transcribeweight}
+          checked={props.checkvaluearr[0]}
           onChange={setChecked}
         ></input>
         抄重量
@@ -28,7 +31,7 @@ function CheckBoxesEdit() {
         <input
           type="checkbox"
           id="mixpallet"
-          checked={ctx.checkState.mixpallet}
+          checked={props.checkvaluearr[1]}
           onChange={setChecked}
         ></input>
         混合板
@@ -37,7 +40,7 @@ function CheckBoxesEdit() {
         <input
           type="checkbox"
           id="classifyexpiry"
-          checked={ctx.checkState.classifyexpiry}
+          checked={props.checkvaluearr[2]}
           onChange={setChecked}
         ></input>
         分效期

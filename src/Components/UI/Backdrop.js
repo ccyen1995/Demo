@@ -7,7 +7,7 @@ const Backdrop = () => {
   const dispatch = useDispatch()
   const clickHandler = () => {
     dispatch(backdropActions.hide())
-    dispatch(arrivallistdataActions.editListdata({ editing: false }))
+    dispatch(arrivallistdataActions.editfalse())
     dispatch(confirmmodalActions.hide())
   }
   return <div className={classes.backdrop} onClick={clickHandler}></div>

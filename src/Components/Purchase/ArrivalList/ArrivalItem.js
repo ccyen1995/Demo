@@ -29,10 +29,9 @@ function ArrivalItem({ keys, data }) {
     )
   }
   function editListitem(n) {
-    dispatch(arrivallistdataActions.editListdata({ editing: true, data }))
+    dispatch(arrivallistdataActions.editListdata({ type: 'data', value: data }))
     dispatch(backdropActions.show())
     // ==以下嘗試失敗QQ
-
     // const converCheckvalue = {
     //   transcribeweight: checkvaluearr[0],
     //   mixpallet: checkvaluearr[1],

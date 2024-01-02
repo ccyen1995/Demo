@@ -3,17 +3,18 @@ import { useState, useContext, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
-
+import { useDispatch } from 'react-redux'
+import { arrivallistdataActions } from '../../../../Store/slices/arrivallistdata_slice'
 function GoodsEdit(props) {
   const ctx = useContext(AddArrivalItem_context)
-
+  const dispatch = useDispatch()
   const [ndata, setndata] = useState({
-    order: props.keys,
-    mainname: '',
-    subname: '',
-    amount: 0
+    order: props.item.order,
+    mainname: props.item.mainname,
+    subname: props.item.subname,
+    amount: props.item.amount
   })
-
+  console.log(props.item)
   //* 拿到輸入值
   function getValues(e) {
     setndata((p) => {
@@ -33,11 +34,13 @@ function GoodsEdit(props) {
 
   useEffect(() => {
     //* 改變到貨陣列
-    ctx.setcontent((p) => {
-      p[props.keys] = Object.assign({}, ndata)
-      return [...p]
-    })
-
+    // ctx.setcontent((p) => {
+    //   p[props.keys] = Object.assign({}, ndata)
+    //   return [...p]
+    // })
+    dispatch(
+      arrivallistdataActions.editListdata({ type: 'goods', value: ndata })
+    )
     //* 判斷是否有效
     if (ndata.mainname !== '' && ndata.amount !== 0) {
       ctx.setndatavalid(true)

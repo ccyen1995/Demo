@@ -1,16 +1,17 @@
 import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
 import styles from './CustomerDataEdit.module.css'
 import { useContext, useReducer } from 'react'
-
+import { useDispatch } from 'react-redux'
+import { arrivallistdataActions } from '../../../../Store/slices/arrivallistdata_slice'
 const reducerfc = (state, action) => {
   state[action.type] = action.val
   return { ...state }
 }
 
-function CustomerData() {
+function CustomerData(props) {
   const ctx = useContext(AddArrivalItem_context)
+  const dispatch = useDispatch()
   const date = ctx.inputDate.toISOString().substring(0, 10)
-
   const [inputstate, dispatchinputstate] = useReducer(reducerfc, {
     firsttype: true,
     isanyword: false,
@@ -19,9 +20,10 @@ function CustomerData() {
   //* 改變customerid欄位
   function setid(e) {
     const value = e.target.value
-    // console.log(/^\d+$/.test(value));
     if ((/^\d+$/.test(value) && value.length < 4) || value === '') {
-      ctx.setcustomerId(e.target.value)
+      dispatch(
+        arrivallistdataActions.editListdata({ type: 'customerId', value })
+      )
       dispatchinputstate({ type: 'isanyword', val: true })
     }
     if (e.target.value === '') {

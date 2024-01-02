@@ -18,7 +18,7 @@ import { arrivallistdataActions } from '../../../Store/slices/arrivallistdata_sl
 function AddArrivalItem() {
   const dispatch = useDispatch()
   const ctx = useContext(AddArrivalItem_context)
-  console.log(ctx)
+
   //* 拿到資料並新增至"到貨列表"的陣列(arrivallist)中
   const submitHandler = () => {
     const { content, checkState, inputDate, customerId } = ctx

@@ -6,7 +6,7 @@ import { useLoaderData } from 'react-router-dom'
 import ArrivalItem from './ArrivalItem'
 //= =icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
 //= =state
 
 import { arrivallistdataActions } from '../../../Store/slices/arrivallistdata_slice'
