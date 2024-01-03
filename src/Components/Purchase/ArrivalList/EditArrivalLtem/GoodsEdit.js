@@ -2,11 +2,11 @@ import styles from './GoodsEdit.module.css'
 import { useState, useContext, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
+import EditArrivalItemModal_context from '../../../../Context/EditArrivalItemModal_context'
 import { useDispatch } from 'react-redux'
 import { arrivallistdataActions } from '../../../../Store/slices/arrivallistdata_slice'
 function GoodsEdit(props) {
-  const ctx = useContext(AddArrivalItem_context)
+  const ctx = useContext(EditArrivalItemModal_context)
   const dispatch = useDispatch()
   const [ndata, setndata] = useState({
     order: props.item.order,
@@ -14,7 +14,7 @@ function GoodsEdit(props) {
     subname: props.item.subname,
     amount: props.item.amount
   })
-  console.log(props.item)
+  // console.log(props.item)
   //* 拿到輸入值
   function getValues(e) {
     setndata((p) => {
@@ -34,46 +34,44 @@ function GoodsEdit(props) {
 
   useEffect(() => {
     //* 改變到貨陣列
-    // ctx.setcontent((p) => {
-    //   p[props.keys] = Object.assign({}, ndata)
-    //   return [...p]
-    // })
     dispatch(
-      arrivallistdataActions.editListdata({ type: 'goods', value: ndata })
+      arrivallistdataActions.editListdata({
+        type: 'goods',
+        value: {
+          order: ndata.order,
+          data: {
+            mainname: ndata.mainname,
+            subname: ndata.subname,
+            amount: ndata.amount
+          }
+        }
+      })
     )
     //* 判斷是否有效
     if (ndata.mainname !== '' && ndata.amount !== 0) {
-      ctx.setndatavalid(true)
+      ctx.setinputvalid(true)
     } else {
-      ctx.setndatavalid(false)
-    }
-    if (ctx.clear) {
-      ctx.setclear(false)
+      ctx.setinputvalid(false)
     }
   }, [ndata])
-
-  if (ctx.clear) {
-    // ?為何不行
-    // setndata((p) => {
-    //   p.mainname = 0
-    //   p.subname = ''
-    //   p.amount = 0
-    //   return { ...p }
-    // })
-    // *偷吃步
-    ndata.mainname = ''
-    ndata.subname = ''
-    ndata.amount = 0
+  function deletelistitem() {
+    dispatch(
+      arrivallistdataActions.editListdata({
+        type: 'deletelistitem',
+        value: ndata.order
+      })
+    )
   }
+  function addlistitem() {}
   return (
     <div className={styles.frame}>
       {!props.isbtn || (
-        <button className={styles.minusBtn} onClick={ctx.deletelistitem}>
+        <button className={styles.minusBtn} onClick={deletelistitem}>
           <FontAwesomeIcon icon={faMinus} />
         </button>
       )}
       {!props.isbtn || (
-        <button className={styles.plusBtn} onClick={ctx.addlistitem}>
+        <button className={styles.plusBtn} onClick={props.addlistitem}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       )}

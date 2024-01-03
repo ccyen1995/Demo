@@ -67,21 +67,23 @@ const arrivallistdataState = createSlice({
       st.arrivallistdata = newstate
     },
     editListdata(st, ac) {
-      console.log(ac.payload.value)
       st.editing = true
       switch (ac.payload.type) {
         case 'data':
           st.editItam = ac.payload.value
           break
-        // case 'checkboxes':
-        //   st.editItam = ac.payload.value
-        //   break
+        case 'checkboxes':
+          st.editItam.checkvaluearr = ac.payload.value
+          break
         // case 'customerId':
         //   st.editItam = ac.payload.value
         //   break
-        // case 'goods':
-        //   st.editItam = ac.payload.value
-        //   break
+        case 'goods':
+          st.editItam.newcontent[ac.payload.value.order] = ac.payload.value.data
+          break
+        case 'deletelistitem':
+          st.editItam.newcontent.splice(ac.payload.value, 1)
+          break
       }
     },
     edittrue(st) {

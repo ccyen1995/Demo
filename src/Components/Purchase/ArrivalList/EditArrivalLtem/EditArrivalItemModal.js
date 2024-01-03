@@ -5,11 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import GoodsEdit from './GoodsEdit'
 import CustomerDataEdit from './CustomerDataEdit'
 import CheckBoxesEdit from './CheckBoxesEdit'
+import { useState, useContext } from 'react'
+import EditArrivalItemModal_context from '../../../../Context/EditArrivalItemModal_context'
 
 function EditArrivalItemModal() {
   const dispatch = useDispatch()
+  const ctx = useContext(EditArrivalItemModal_context)
   const data = useSelector((s) => s.arrivallistdata.editItam)
-  console.log(data)
+  // console.log(data)
+  console.log(ctx.inputvalid)
 
   const { checkvaluearr, customerId, newinputDate, newcontent, timestamp } =
     data
@@ -23,6 +27,9 @@ function EditArrivalItemModal() {
     dispatch(arrivallistdataActions.editfalse())
     dispatch(backdropActions.hide())
   }
+
+  function deletelistitem() {}
+  function addlistitem() {}
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
@@ -38,12 +45,19 @@ function EditArrivalItemModal() {
           isbtn = false
         }
         return (
-          <GoodsEdit key={i} keys={i} isbtn={isbtn} item={item}></GoodsEdit>
+          <GoodsEdit
+            key={i}
+            keys={i}
+            isbtn={isbtn}
+            item={item}
+            deletelistitem={deletelistitem}
+            addlistitem={addlistitem}
+          ></GoodsEdit>
         )
       })}
       <div className={styles.btndiv}>
         <button onClick={cancelHandler}>取消</button>
-        <button>送出</button>
+        <button disabled={!ctx.inputvalid}>送出</button>
       </div>
     </div>
   )

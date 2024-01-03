@@ -11,7 +11,8 @@ const reducerfc = (state, action) => {
 function CustomerData(props) {
   const ctx = useContext(AddArrivalItem_context)
   const dispatch = useDispatch()
-  const date = ctx.inputDate.toISOString().substring(0, 10)
+  const date = props.newinputDate.slice(1, 11)
+
   const [inputstate, dispatchinputstate] = useReducer(reducerfc, {
     firsttype: true,
     isanyword: false,
@@ -63,7 +64,7 @@ function CustomerData(props) {
           <input
             type="text"
             id="CustomerData_CustomerId"
-            value={ctx.customerId}
+            value={props.customerId}
             onChange={setid}
             onClick={clearid}
             onBlur={anyword}
