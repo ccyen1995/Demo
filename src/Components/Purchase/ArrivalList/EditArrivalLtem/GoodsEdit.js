@@ -9,12 +9,11 @@ function GoodsEdit(props) {
   const ctx = useContext(EditArrivalItemModal_context)
   const dispatch = useDispatch()
   const [ndata, setndata] = useState({
-    order: props.item.order,
+    order: props.item.order || props.keys,
     mainname: props.item.mainname,
     subname: props.item.subname,
     amount: props.item.amount
   })
-  // console.log(props.item)
   //* 拿到輸入值
   function getValues(e) {
     setndata((p) => {
@@ -31,7 +30,7 @@ function GoodsEdit(props) {
       return { ...p }
     })
   }
-
+  // !console.js:213 Warning: A component is changing an uncontrolled input to be controlled.
   useEffect(() => {
     //* 改變到貨陣列
     dispatch(
@@ -40,6 +39,7 @@ function GoodsEdit(props) {
         value: {
           order: ndata.order,
           data: {
+            order: ndata.order,
             mainname: ndata.mainname,
             subname: ndata.subname,
             amount: ndata.amount
@@ -48,7 +48,7 @@ function GoodsEdit(props) {
       })
     )
     //* 判斷是否有效
-    if (ndata.mainname !== '' && ndata.amount !== 0) {
+    if (ndata.mainname && ndata.amount) {
       ctx.setinputvalid(true)
     } else {
       ctx.setinputvalid(false)
@@ -62,7 +62,14 @@ function GoodsEdit(props) {
       })
     )
   }
-  function addlistitem() {}
+  function addlistitem() {
+    dispatch(
+      arrivallistdataActions.editListdata({
+        type: 'addlistitem',
+        value: null
+      })
+    )
+  }
   return (
     <div className={styles.frame}>
       {!props.isbtn || (
@@ -71,7 +78,7 @@ function GoodsEdit(props) {
         </button>
       )}
       {!props.isbtn || (
-        <button className={styles.plusBtn} onClick={props.addlistitem}>
+        <button className={styles.plusBtn} onClick={addlistitem}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       )}
@@ -93,6 +100,7 @@ function GoodsEdit(props) {
             getValues(e)
           }}
           value={ndata.subname}
+          // eslint-disable-next-line react/no-unknown-property
           idd="subname"
         ></input>
         <input

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useContext } from 'react'
 import AddArrivalItem_context from '../../Context/AddArrivalItem_context'
 import { sandArrivallistData } from '../../Store/actions/senddata_actions'
-import { arrivallistdataActions } from '../../Store/slices/arrivallistdata_slice'
 
 const CheckModal = () => {
   const dispatch = useDispatch()
@@ -13,7 +12,6 @@ const CheckModal = () => {
   const confirmstate = useSelector((s) => s.confirmmodal)
 
   function confirmHandler() {
-    // console.log(confirmstate.connectSwitch);
     switch (confirmstate.connectSwitch) {
       case 'clearInput':
         ctx.setcheckState({
@@ -21,7 +19,7 @@ const CheckModal = () => {
           mixpallet: false,
           classifyexpiry: false
         })
-        ctx.setinputDate(new Date())
+        ctx.setinputDate(new Date().toLocaleDateString('en-CA'))
         ctx.setclear(true)
         ctx.setcustomerId('')
         ctx.setcontent([])
@@ -30,10 +28,11 @@ const CheckModal = () => {
       case 'deletelistitem':
         dispatch(
           sandArrivallistData({
-            data: confirmstate.extra,
-            extra: 'deletelistitem'
+            action: 'deletelistitem',
+            data: confirmstate.extra
           })
         )
+
         break
     }
     dispatch(confirmmodalActions.hide())

@@ -1,6 +1,6 @@
 import AddArrivalItem_context from '../../../../Context/AddArrivalItem_context'
 import styles from './CustomerDataEdit.module.css'
-import { useContext, useReducer } from 'react'
+import { useContext, useReducer, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { arrivallistdataActions } from '../../../../Store/slices/arrivallistdata_slice'
 const reducerfc = (state, action) => {
@@ -9,10 +9,9 @@ const reducerfc = (state, action) => {
 }
 
 function CustomerData(props) {
-  const ctx = useContext(AddArrivalItem_context)
   const dispatch = useDispatch()
-  const date = props.newinputDate.slice(1, 11)
 
+  const date = props.newinputDate
   const [inputstate, dispatchinputstate] = useReducer(reducerfc, {
     firsttype: true,
     isanyword: false,
@@ -33,12 +32,11 @@ function CustomerData(props) {
     }
   }
 
-  //* 清除customerid欄位，回歸到空值
+  //* 清除customerid欄位，回歸到空值6
   function clearid() {
     if (inputstate.firsttype) {
       dispatchinputstate({ type: 'long', val: false })
       dispatchinputstate({ type: 'firsttype', val: false })
-      ctx.setcustomerId('')
     }
   }
   //* 裡面有字嗎?
@@ -53,7 +51,12 @@ function CustomerData(props) {
   }
   //* 改變日期
   function changeDate(e) {
-    ctx.setinputDate(new Date(e.target.value))
+    dispatch(
+      arrivallistdataActions.editListdata({
+        type: 'newinputDate',
+        value: e.target.value
+      })
+    )
   }
   return (
     <div className={styles.frame}>

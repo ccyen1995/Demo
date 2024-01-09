@@ -9,8 +9,7 @@ const reducerfc = (state, action) => {
 
 function CustomerData() {
   const ctx = useContext(AddArrivalItem_context)
-  const date = ctx.inputDate.toISOString().substring(0, 10)
-
+  const date = ctx.inputDate
   const [inputstate, dispatchinputstate] = useReducer(reducerfc, {
     firsttype: true,
     isanyword: false,
@@ -50,7 +49,10 @@ function CustomerData() {
   }
   //* 改變日期
   function changeDate(e) {
-    ctx.setinputDate(new Date(e.target.value))
+    // console.log(e.target.value)
+    // console.log(new Date().toLocaleDateString('en-CA'))
+    // console.log(new Date())
+    ctx.setinputDate(e.target.value)
   }
   return (
     <div className={styles.frame}>

@@ -22,17 +22,24 @@ function AddArrivalItem() {
   //* 拿到資料並新增至"到貨列表"的陣列(arrivallist)中
   const submitHandler = () => {
     const { content, checkState, inputDate, customerId } = ctx
+    const datenow = Date.now()
     const newcontent = content.map((o) => o)
     const checkvaluearr = Object.values(checkState)
-    const newinputDate = JSON.stringify(inputDate)
-
+    const newinputDate = inputDate
     const data = {
       customerId,
       newinputDate,
       newcontent,
       checkvaluearr
     }
-    dispatch(sandArrivallistData({ data, extra: '' }))
+    dispatch(
+      arrivallistdataActions.addListdata({
+        newinputDate,
+        now: datenow,
+        data
+      })
+    )
+    dispatch(sandArrivallistData({ data, action: 'senddata', now: datenow }))
   }
 
   const clearHandler = () => {

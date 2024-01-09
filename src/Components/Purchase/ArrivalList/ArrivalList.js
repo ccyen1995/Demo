@@ -15,8 +15,9 @@ function ArrivalList() {
   const dispatch = useDispatch()
   //* loader載入資料
   const loaderdata = useLoaderData()
-  // ?List在第二次選渲染時與第一次的loaderdata不一樣
+
   const list = useSelector((s) => s.arrivallistdata.arrivallistdata)
+  console.log(list)
 
   useEffect(() => {
     if (list.length === 0) {
@@ -37,7 +38,6 @@ function ArrivalList() {
   let nestlist
   if (list.length === 0) {
     nestlist = makenestdata(loaderdata)
-    // console.log('list length = 0')
   } else {
     nestlist = makenestdata(list)
   }

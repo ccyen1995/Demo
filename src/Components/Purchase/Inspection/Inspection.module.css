@@ -1,0 +1,38 @@
+.frame {
+  position: absolute;
+  z-index: 20;
+  width: 500px;
+  width: 500px;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: rgb(200, 200, 200) 0px 5px 5px 2px;
+}
+.h11 {
+  text-align: center;
+  position: relative;
+}
+.h11 span {
+  background-color: #fff;
+  padding: 0 5px;
+}
+.h11::before {
+  content: '';
+  height: 1.5px;
+  width: 50%;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: -1;
+}
+.h11::after {
+  content: '';
+  height: 1.5px;
+  width: 50%;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: -1;
+}

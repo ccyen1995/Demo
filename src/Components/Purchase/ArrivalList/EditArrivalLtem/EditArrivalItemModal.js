@@ -7,29 +7,54 @@ import CustomerDataEdit from './CustomerDataEdit'
 import CheckBoxesEdit from './CheckBoxesEdit'
 import { useState, useContext } from 'react'
 import EditArrivalItemModal_context from '../../../../Context/EditArrivalItemModal_context'
+import { sandEditlistData } from '../../../../Store/actions/senddata_actions'
 
 function EditArrivalItemModal() {
   const dispatch = useDispatch()
   const ctx = useContext(EditArrivalItemModal_context)
   const data = useSelector((s) => s.arrivallistdata.editItam)
-  // console.log(data)
-  console.log(ctx.inputvalid)
-
   const { checkvaluearr, customerId, newinputDate, newcontent, timestamp } =
     data
-  const converCheckvalue = {
-    transcribeweight: checkvaluearr[0],
-    mixpallet: checkvaluearr[1],
-    classifyexpiry: checkvaluearr[2]
-  }
+  const [selecteddate, setselectdate] = useState(newinputDate)
 
   function cancelHandler() {
     dispatch(arrivallistdataActions.editfalse())
     dispatch(backdropActions.hide())
   }
+  function submitEdititem(data, timestamp) {
+    // *轉換unextainable物件
+    const newdata = JSON.parse(JSON.stringify(data))
+    delete newdata.timestamp
 
-  function deletelistitem() {}
-  function addlistitem() {}
+    // *刪除編輯前的項目
+    // dispatch(
+    //   arrivallistdataActions.deleteListdata({
+    //     datakeys: timestamp,
+    //     newinputDate: selecteddate
+    //   })
+    // )
+
+    // *新增編輯後的項目
+    dispatch(
+      arrivallistdataActions.updateeditListdata({
+        newdata,
+        timestamp,
+        selecteddate
+      })
+    )
+    // *fetch後端
+    dispatch(
+      sandEditlistData({
+        selecteddate,
+        data: { checkvaluearr, customerId, newinputDate, newcontent },
+        timestamp
+      })
+    )
+
+    dispatch(arrivallistdataActions.editfalse())
+    dispatch(backdropActions.hide())
+  }
+
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
@@ -45,19 +70,19 @@ function EditArrivalItemModal() {
           isbtn = false
         }
         return (
-          <GoodsEdit
-            key={i}
-            keys={i}
-            isbtn={isbtn}
-            item={item}
-            deletelistitem={deletelistitem}
-            addlistitem={addlistitem}
-          ></GoodsEdit>
+          <GoodsEdit key={i} keys={i} isbtn={isbtn} item={item}></GoodsEdit>
         )
       })}
       <div className={styles.btndiv}>
         <button onClick={cancelHandler}>取消</button>
-        <button disabled={!ctx.inputvalid}>送出</button>
+        <button
+          disabled={!ctx.inputvalid}
+          onClick={() => {
+            submitEdititem(data, timestamp)
+          }}
+        >
+          送出
+        </button>
       </div>
     </div>
   )

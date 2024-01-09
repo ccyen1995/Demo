@@ -6,7 +6,9 @@ export const AddArrivalItem_context_Provider = (props) => {
   const [clear, setclear] = useState(false)
   const [content, setcontent] = useState([])
   const [customerId, setcustomerId] = useState('')
-  const [inputDate, setinputDate] = useState(new Date())
+  const [inputDate, setinputDate] = useState(
+    new Date().toLocaleDateString('en-CA')
+  )
   const [ndatavalid, setndatavalid] = useState(false)
   const [inputvalid, setinputvalid] = useState(false)
   const [arrivallist, setarrivallist] = useState([])

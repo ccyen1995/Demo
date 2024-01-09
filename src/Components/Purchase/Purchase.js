@@ -6,7 +6,7 @@ import ArrivalList from './ArrivalList/ArrivalList'
 import AddArrivalItem from './ArrivalList/AddArrivalItem'
 import EditArrivalItemModal from './ArrivalList/EditArrivalLtem/EditArrivalItemModal'
 import CheckModal from '../UI/CheckModal'
-
+import Inspection from './Inspection/Inspection'
 // ==state
 import { AddArrivalItem_context_Provider } from '../../Context/AddArrivalItem_context'
 import { EditArrivalItemModal_context_Provider } from '../../Context/EditArrivalItemModal_context'
@@ -16,6 +16,7 @@ function Purchase() {
   const editState = useSelector((state) => state.arrivallistdata.editing)
   return (
     <div className={styles.purchase}>
+      <Inspection></Inspection>
       <EditArrivalItemModal_context_Provider>
         {editState ? <EditArrivalItemModal></EditArrivalItemModal> : null}
       </EditArrivalItemModal_context_Provider>

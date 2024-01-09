@@ -15,7 +15,7 @@ const arrivallistdataState = createSlice({
     converitem(state, action) {
       state.arrivallistdata = action.payload
     },
-    updateListdata(st, ac) {
+    addListdata(st, ac) {
       // ?怎麼樣改變這裡的物件內容比較正確，有比JSON方法更好的嗎
       const state = JSON.parse(JSON.stringify(current(st.arrivallistdata)))
       function queryDate(date, state) {
@@ -49,7 +49,6 @@ const arrivallistdataState = createSlice({
     },
     deleteListdata(st, ac) {
       const state = JSON.parse(JSON.stringify(current(st.arrivallistdata)))
-
       function deletedata(state) {
         // *找到對的日期
         const n = state.findIndex((d, i) => {
@@ -66,25 +65,80 @@ const arrivallistdataState = createSlice({
       const newstate = deletedata(state)
       st.arrivallistdata = newstate
     },
+    updateeditListdata(st, ac) {
+      const state = JSON.parse(JSON.stringify(current(st.arrivallistdata)))
+      function updatedata(state) {
+        // *找到相符的日期
+        const n = state.findIndex((d, i) => {
+          return Object.keys(d)[0] === ac.payload.newdata.newinputDate
+        })
+
+        // *如果沒有相符的日期，則新增一筆，並刪除一筆
+        if (n === -1) {
+          // *找到舊項目
+          const n3 = state.findIndex((d, i) => {
+            return Object.keys(d)[0] === ac.payload.selecteddate
+          })
+          const n4 = state[n3][ac.payload.selecteddate].findIndex((d, i) => {
+            return Object.keys(d)[0] === ac.payload.timestamp
+          })
+          // *刪除舊項目
+          if (state[n3][ac.payload.selecteddate].length === 1) {
+            state.splice(n3, 1)
+          } else {
+            state[n3][ac.payload.selecteddate].splice(n4, 1)
+          }
+          // *新增一筆
+          const newdayitem = {
+            [ac.payload.newdata.newinputDate]: [
+              {
+                [ac.payload.timestamp]: ac.payload.newdata
+              }
+            ]
+          }
+          state.push(newdayitem)
+        } else {
+          // *替換項目
+          const n2 = state[n][ac.payload.newdata.newinputDate].findIndex(
+            (d, i) => {
+              return Object.keys(d)[0] === ac.payload.timestamp
+            }
+          )
+          state[n][ac.payload.newdata.newinputDate][n2][ac.payload.timestamp] =
+            ac.payload.newdata
+        }
+        return state
+      }
+      const newstate = updatedata(state)
+      st.arrivallistdata = newstate
+    },
     editListdata(st, ac) {
       st.editing = true
+      let state = JSON.parse(JSON.stringify(current(st.editItam)))
       switch (ac.payload.type) {
         case 'data':
-          st.editItam = ac.payload.value
+          state = ac.payload.value
           break
         case 'checkboxes':
-          st.editItam.checkvaluearr = ac.payload.value
+          state.checkvaluearr = ac.payload.value
           break
-        // case 'customerId':
-        //   st.editItam = ac.payload.value
-        //   break
+        case 'customerId':
+          state.customerId = ac.payload.value
+          break
+        case 'newinputDate':
+          state.newinputDate = ac.payload.value
+          break
         case 'goods':
-          st.editItam.newcontent[ac.payload.value.order] = ac.payload.value.data
+          state.newcontent[ac.payload.value.order] = ac.payload.value.data
           break
         case 'deletelistitem':
-          st.editItam.newcontent.splice(ac.payload.value, 1)
+          state.newcontent.splice(ac.payload.value, 1)
+          break
+        case 'addlistitem':
+          state.newcontent.push('')
           break
       }
+      st.editItam = state
     },
     edittrue(st) {
       st.editing = true

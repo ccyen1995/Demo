@@ -9,11 +9,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { confirmmodalActions } from '../../../Store/slices/confirmmodal_slice'
 import { backdropActions } from '../../../Store/slices/backdrop_slice'
 import { arrivallistdataActions } from '../../../Store/slices/arrivallistdata_slice'
-import AddArrivalItem_context from '../../../Context/AddArrivalItem_context'
+import { acceptanceListActions } from '../../../Store/slices/acceptance_slice'
 
 // *元件開始
 function ArrivalItem({ keys, data }) {
-  const ctx = useContext(AddArrivalItem_context)
   const dispatch = useDispatch()
   const { checkvaluearr, customerId, newinputDate, newcontent, timestamp } =
     data
@@ -28,10 +27,15 @@ function ArrivalItem({ keys, data }) {
       })
     )
   }
-  function editListitem(n) {
+  function acceptance(d) {
+    // console.log(d)
+    dispatch(acceptanceListActions.importData(d))
+  }
+  function editListitem() {
     dispatch(arrivallistdataActions.editListdata({ type: 'data', value: data }))
     dispatch(backdropActions.show())
-    // ==以下嘗試失敗QQ
+    // ==以下嘗試與AddArrivalItem共用相同的context
+    // ==也使用相同的原件，似乎做不到，也不符合UX，放棄
     // const converCheckvalue = {
     //   transcribeweight: checkvaluearr[0],
     //   mixpallet: checkvaluearr[1],
@@ -58,7 +62,12 @@ function ArrivalItem({ keys, data }) {
         return <Goods key={i} data={data}></Goods>
       })}
       <div className={styles.buttonDiv}>
-        <button className={styles.checkBtn}>
+        <button
+          className={styles.checkBtn}
+          onClick={() => {
+            acceptance(data)
+          }}
+        >
           <FontAwesomeIcon icon={faPen} className={styles.checkBtn_icon} />
           驗收
         </button>
