@@ -17,7 +17,6 @@ function ArrivalList() {
   const loaderdata = useLoaderData()
 
   const list = useSelector((s) => s.arrivallistdata.arrivallistdata)
-  console.log(list)
 
   useEffect(() => {
     if (list.length === 0) {

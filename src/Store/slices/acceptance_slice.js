@@ -6,7 +6,6 @@ const acceptanceListState = createSlice({
   initialState,
   reducers: {
     importData(st, ac) {
-      console.log(ac.payload)
       const { checkvaluearr, customerId, newinputDate, newcontent, timestamp } =
         ac.payload
       st.items = newcontent

@@ -12,6 +12,7 @@ function OrderInfo() {
       </div>
       <div>
         <p>{listInfo.newinputDate}</p>
+        <p>單號</p>
       </div>
     </div>
   )
