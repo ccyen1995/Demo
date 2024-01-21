@@ -15,7 +15,6 @@
 }
 .btndiv {
   display: flex;
-  background-color: aqua;
   justify-content: space-evenly;
   padding: 10px;
 }
