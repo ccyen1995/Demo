@@ -49,6 +49,7 @@ const arrivallistdataState = createSlice({
     },
     deleteListdata(st, ac) {
       const state = JSON.parse(JSON.stringify(current(st.arrivallistdata)))
+
       function deletedata(state) {
         // *找到對的日期
         const n = state.findIndex((d, i) => {

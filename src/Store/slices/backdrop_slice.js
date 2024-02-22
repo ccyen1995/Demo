@@ -11,8 +11,8 @@ const backdropState = createSlice({
     },
     hide(state) {
       // ==state非物件的話必須有回傳值
-      // ==state = false
-      return (state = false)
+      state = false
+      // return (state = false)
     }
   }
 })

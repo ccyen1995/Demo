@@ -16,7 +16,7 @@ function Purchase() {
   const editState = useSelector((state) => state.arrivallistdata.editing)
   return (
     <div className={styles.purchase}>
-      <Inspection></Inspection>
+      {/* <Inspection></Inspection> */}
       <EditArrivalItemModal_context_Provider>
         {editState ? <EditArrivalItemModal></EditArrivalItemModal> : null}
       </EditArrivalItemModal_context_Provider>

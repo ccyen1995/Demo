@@ -1,5 +1,4 @@
-function Goods(props) {
-  const { items } = props
+function Goods({ items }) {
   return (
     <li>
       <span>{items.order + 1}</span>

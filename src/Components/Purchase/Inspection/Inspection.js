@@ -3,6 +3,8 @@ import OrderInfo from './OrderInfo'
 import Goods from './Goods'
 import { useSelector } from 'react-redux'
 import PalletTypes from './PalletTypes'
+import Row_Inspection from './Row_Inspection'
+
 function Inspection() {
   const items = useSelector((s) => s.acceptanceList.items)
   console.log(items)
@@ -25,7 +27,9 @@ function Inspection() {
         <PalletTypes value={'混和板'}></PalletTypes>
         <PalletTypes value={'抄重板'}></PalletTypes>
       </div>
-      <div></div>
+      <div>
+        <Row_Inspection items={items}></Row_Inspection>
+      </div>
     </div>
   )
 }

@@ -45,6 +45,8 @@ function ArrivalList() {
     // console.log(Object.isExtensible(it));
     // ?為什麼不能夠加入屬性
     const newitem = JSON.parse(JSON.stringify(it))
+
+    
     newitem[timestamp].timestamp = timestamp
     const h = Object.values(newitem)
     return h[0]
