@@ -14,9 +14,10 @@ import { EditArrivalItemModal_context_Provider } from '../../Context/EditArrival
 function Purchase() {
   const confirmmodalState = useSelector((state) => state.confirmmodal.show)
   const editState = useSelector((state) => state.arrivallistdata.editing)
+  const acceptanceListState = useSelector((state) => state.acceptanceList.show)
   return (
     <div className={styles.purchase}>
-      {/* <Inspection></Inspection> */}
+      {acceptanceListState ? <Inspection></Inspection> : null}
       <EditArrivalItemModal_context_Provider>
         {editState ? <EditArrivalItemModal></EditArrivalItemModal> : null}
       </EditArrivalItemModal_context_Provider>

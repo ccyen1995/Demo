@@ -1,6 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 
-const initialState = { items: [], listInfo: {} }
+const initialState = { items: [], listInfo: {}, show: false }
 const acceptanceListState = createSlice({
   name: 'acceptanceList',
   initialState,
@@ -10,6 +10,12 @@ const acceptanceListState = createSlice({
         ac.payload
       st.items = newcontent
       st.listInfo = { checkvaluearr, customerId, newinputDate }
+    },
+    show(st, ac) {
+      st.show = true
+    },
+    hide(st, ac) {
+      st.show = false
     }
   }
 })

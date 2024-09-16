@@ -28,8 +28,8 @@ function ArrivalItem({ keys, data }) {
     )
   }
   function acceptance(d) {
-    // console.log(d)
     dispatch(acceptanceListActions.importData(d))
+    dispatch(acceptanceListActions.show())
   }
   function editListitem() {
     dispatch(arrivallistdataActions.editListdata({ type: 'data', value: data }))

@@ -2,15 +2,23 @@ import { useState, useRef } from 'react'
 
 function Row_Inspection({ items }) {
   const [singlePallet_amount, setsinglePallet_amount] = useState(0)
-  const y = useRef()
+  const selectref = useRef()
   function setsinglePallet_amount_handler(e) {
     console.log(items)
-    console.log(y.current)
     setsinglePallet_amount(e.target.value)
+  }
+  function selectHandler() {
+    console.log('hi')
+    console.dir(selectref.current.selectedIndex)
   }
   return (
     <div>
-      <select onChange={() => {}}>
+      <select
+        onChange={() => {
+          selectHandler()
+        }}
+        ref={selectref}
+      >
         {items.map((i, d) => {
           return <option key={d}>{`${i.mainname} -- ${i.subname}`}</option>
         })}
@@ -19,7 +27,6 @@ function Row_Inspection({ items }) {
         <p>
           <label>單棧數:</label>
           <input
-            ref={y}
             type="number"
             value={singlePallet_amount || ''}
             onChange={setsinglePallet_amount_handler}

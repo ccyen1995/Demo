@@ -1,11 +1,13 @@
 import cls from './Inspection.module.css'
 import OrderInfo from './OrderInfo'
 import Goods from './Goods'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import PalletTypes from './PalletTypes'
 import Row_Inspection from './Row_Inspection'
+import { acceptanceListActions } from '../../../Store/slices/acceptance_slice'
 
 function Inspection() {
+  const dispatch = useDispatch()
   const items = useSelector((s) => s.acceptanceList.items)
   console.log(items)
   return (
@@ -30,6 +32,13 @@ function Inspection() {
       <div>
         <Row_Inspection items={items}></Row_Inspection>
       </div>
+      <button
+        onClick={() => {
+          dispatch(acceptanceListActions.hide())
+        }}
+      >
+        關閉
+      </button>
     </div>
   )
 }

@@ -4,7 +4,7 @@ function PalletTypes(props) {
   return (
     <button>
       {props.value}
-      <FontAwesomeIcon icon={faPlus} />
+      <FontAwesomeIcon icon={faPlus}/>
     </button>
   )
 }
