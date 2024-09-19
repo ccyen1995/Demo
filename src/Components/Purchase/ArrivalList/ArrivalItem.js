@@ -51,11 +51,11 @@ function ArrivalItem({ keys, data }) {
   return (
     <div className={styles.frame}>
       <div className={styles.div1}>
-        <CustomerData
+        {/* <CustomerData
           order={keys}
           id={customerId}
           date={newinputDate}
-        ></CustomerData>
+        ></CustomerData> */}
         <CheckBoxes checks={checkvaluearr}></CheckBoxes>
       </div>
       {newcontent.map((data, i, arr) => {
