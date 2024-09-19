@@ -24,7 +24,7 @@ function Purchase() {
       <AddArrivalItem_context_Provider>
         {confirmmodalState ? <CheckModal></CheckModal> : null}
         {/* <ArrivalList></ArrivalList> */}
-        <AddArrivalItem></AddArrivalItem>
+        {/* <AddArrivalItem></AddArrivalItem> */}
       </AddArrivalItem_context_Provider>
     </div>
   )
