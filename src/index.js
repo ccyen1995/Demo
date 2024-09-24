@@ -1,47 +1,46 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import store from './Store/Store'
-import Purchase from './Components/Purchase/Purchase'
-import Stock from './Components/Stock/Stock'
-import Ship from './Components/Ship/Ship'
-import Client from './Components/Client/Client'
-import User from './Components/User/User'
-import Home from './Components/Home/Home'
-import ErrorRoute from './Components/Error/ErrorRoute'
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createRoot } from "react-dom/client"
+import { Provider } from "react-redux"
+import store from "./Store/Store"
+import Purchase from "./Components/Purchase/Purchase"
+import Stock from "./Components/Stock/Stock"
+import Ship from "./Components/Ship/Ship"
+import Client from "./Components/Client/Client"
+import User from "./Components/User/User"
+import Home from "./Components/Home/Home"
+import ErrorRoute from "./Components/Error/ErrorRoute"
 
-import { ArrivalList_Loader } from './Components/Purchase/ArrivalList/ArrivalList'
+import { ArrivalList_Loader } from "./Components/Purchase/ArrivalList/ArrivalList"
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Home></Home>,
     errorElement: <ErrorRoute></ErrorRoute>,
     children: [
-      { path: '/', element: <h1>歡迎使用倉儲系統</h1> },
       {
-        path: 'purchase',
+        path: "purchase",
         element: <Purchase></Purchase>,
-        loader: ArrivalList_Loader
+        loader: ArrivalList_Loader,
       },
       {
-        path: 'stock',
-        element: <Stock></Stock>
+        path: "stock",
+        element: <Stock></Stock>,
       },
       {
-        path: 'ship',
-        element: <Ship></Ship>
+        path: "ship",
+        element: <Ship></Ship>,
       },
       {
-        path: 'client',
-        element: <Client></Client>
+        path: "client",
+        element: <Client></Client>,
       },
       {
-        path: 'user',
-        element: <User></User>
-      }
-    ]
-  }
+        path: "user",
+        element: <User></User>,
+      },
+    ],
+  },
 ])
 
 function App() {
@@ -51,6 +50,6 @@ function App() {
     </Provider>
   )
 }
-const container = document.getElementById('root')
+const container = document.getElementById("root")
 const root = createRoot(container)
 root.render(<App></App>)
