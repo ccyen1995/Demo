@@ -9,12 +9,13 @@ import Client from "./Components/Client/Client"
 import User from "./Components/User/User"
 import Home from "./Components/Home/Home"
 import ErrorRoute from "./Components/Error/ErrorRoute"
-
+import Me from "./Components/Me/me"
 import { ArrivalList_Loader } from "./Components/Purchase/ArrivalList/ArrivalList"
 
 const router = createBrowserRouter([
+  { path: "/", element: <Me></Me> },
   {
-    path: "/",
+    path: "/wms",
     element: <Home></Home>,
     errorElement: <ErrorRoute></ErrorRoute>,
     children: [

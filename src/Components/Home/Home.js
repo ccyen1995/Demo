@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom'
-import { useSelector } from 'react-redux/es/hooks/useSelector'
-import styles from './Home.module.css'
+import { Outlet } from "react-router-dom"
+import { useSelector } from "react-redux/es/hooks/useSelector"
+import styles from "./Home.module.css"
 
-import Menu from './Menu/Menu'
-import Backdrop from '../UI/Backdrop'
+import Menu from "./Menu/Menu"
+import Backdrop from "../UI/Backdrop"
 
 function Home() {
   const backdropState = useSelector((state) => state.backdrop)
