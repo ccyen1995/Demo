@@ -6,68 +6,104 @@
     <title>Document</title>
     <!-- 初始化CSS應該要放在哪裡 -->
     <style>
-      /* Box sizing rules */
+      /* Modern CSS Reset for 2024 */
       *,
       *::before,
       *::after {
         box-sizing: border-box;
-      }
-      /* Remove default margin */
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      p,
-      figure,
-      blockquote,
-      dl,
-      dd {
         margin: 0;
+        padding: 0;
       }
 
-      /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-      ul,
-      ol {
-        list-style: none;
-      }
-
-      /* Set core root defaults */
-      html:focus-within {
-        scroll-behavior: smooth;
-      }
-
-      html {
-        height: 100%;
-      }
-      /* Set core body defaults */
+      html,
       body {
-        text-rendering: optimizeSpeed;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      body {
         line-height: 1.5;
-        height: 100%;
-      }
-      #root {
-        height: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      /* A elements that don't have a class get default styles */
-      a:not([class]) {
-        text-decoration-skip-ink: auto;
-      }
-
-      /* Make images easier to work with */
       img,
-      picture {
-        max-width: 100%;
+      picture,
+      video,
+      canvas,
+      svg {
         display: block;
+        max-width: 100%;
       }
 
-      /* Inherit fonts for inputs and buttons */
       input,
       button,
       textarea,
       select {
         font: inherit;
+      }
+      html {
+        font-size: 16px; /* 假設根元素的字體大小 */
+      }
+
+      h1 {
+        font-size: 2rem; /* 32px */
+      }
+
+      h2 {
+        font-size: 1.5rem; /* 30px */
+      }
+
+      h3 {
+        font-size: 1.17rem; /* 20px */
+      }
+
+      h4 {
+        font-size: 1rem; /* 24px */
+      }
+
+      h5 {
+        font-size: 0.83rem; /* 22px */
+      }
+
+      h6 {
+        font-size: 0.67rem; /* 20px */
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul,
+      ol {
+        list-style: none;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      #root,
+      #__next {
+        isolation: isolate;
+      }
+
+      html:focus-within {
+        scroll-behavior: smooth;
       }
     </style>
   </head>
